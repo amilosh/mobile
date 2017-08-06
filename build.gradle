@@ -1,0 +1,39 @@
+group 'by.it.milosh'
+description = 'Mobile-project'
+
+buildscript{
+    repositories{
+        mavenCentral()
+    }
+    dependencies{
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+version = '1.0'
+
+war {
+    baseName = 'Mobile'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile ('org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE')
+    compile ('org.springframework.boot:spring-boot-starter-thymeleaf:1.4.2.RELEASE')
+    compile ('org.springframework.boot:spring-boot-starter-data-jpa:1.4.2.RELEASE')
+    compile ('mysql:mysql-connector-java:5.1.28')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
