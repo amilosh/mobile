@@ -4,4 +4,6 @@ public interface BaseService<T> {
 
     void add(T t);
 
+    T getById(Long id);
+
 }

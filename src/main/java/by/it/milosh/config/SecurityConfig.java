@@ -13,16 +13,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
 
+    @Autowired
+    private AuthenticationService authService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                //.csrf()
-                //.disable()
                 .authorizeRequests()
-                .antMatchers("/", "/hello", "/addUser").permitAll()
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/user/**").hasAnyRole("USER")
+                .antMatchers("/", "/hello", "/addUser", "/registration").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -35,12 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password("user").roles("USER")
-                .and()
-                .withUser("admin").password("admin").roles("ADMIN");
+        auth.userDetailsService(authService);
     }
 
 }
