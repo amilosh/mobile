@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Main</title>
+</head>
+<body>
+
+<h1>403 - Access is denied</h1>
+
+<div th:inline="text">Hello [[${#httpServletRequest.remoteUser}]], you do not have permission to access this page.</div> <br/><br/>
+
+<a href="/">Перейти на main</a>
+
+</body>
+</html>

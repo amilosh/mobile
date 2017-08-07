@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Main</title>
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width-device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+
+</head>
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default" style="margin-top: 45px">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Login with Username and Password</h3>
+                </div>
+                <div class="panel-body">
+                    <!--@thymesVar id="logout" type="text"-->
+                    <div th:if="${logout}">
+                        <div class="alert alert-info" role="alert">You have been logged successfully.</div>
+                    </div>
+                    <!--@thymesVar id="error" type="text"-->
+                    <div th:if="${error}">
+                        <div class="alert alert-danger" role="alert">Invalid Username or Password</div>
+                    </div>
+                    <form class="form-horizontal" name="form" th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">Username</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="username" placeholder="Username" name="username"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="password" placeholder="Password" name="password"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">Log in</button>
+                            </div>
+                        </div>
+                        <!--@thymesVar id="parameterName" type=""-->
+                        <!--@thymesVar id="_csrf" type=""-->
+                        <!--@thymesVar id="parameterName" type=""-->
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
