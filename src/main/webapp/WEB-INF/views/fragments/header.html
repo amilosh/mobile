@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" style="background-color:white;">Logo</a>
+                <a class="navbar-brand" href="/" style="background-color:white;">Logo</a>
             </div>
             <div class="collapse navbar-collapse" id="headerNavbar">
                 <div class="navbar-form navbar-right">
@@ -26,14 +26,10 @@
                         <a href="/registration"><button type="submit" class="btn btn-info">Регистрация</button></a>
                     </div>
                     <div th:if="${#authorization.expression('isAuthenticated()')}">
-                        <a href="/user"><button type="submit" class="btn btn-success"><span sec:authentication="name">Авторизован</span></button></a>
-                        <!--<<form th:action="@{/logout}" method="post" style="display: inline-block;">-->
-                            <!--<input type="submit" value="Logout" class="btn btn-info">-->
-                        <!--</form>-->
+                        <a href="/user/personal"><button type="submit" class="btn btn-success"><span sec:authentication="name">Авторизован</span></button></a>
                         <form th:action="@{/logout}" method="post" style="display: inline-block">
                             <input type="submit" value="Logout" class="btn btn-info">
                         </form>
-                        <!--<a href="/logout"><button type="submit" class="btn btn-info">Выйти</button></a>-->
                     </div>
                 </div>
             </div>

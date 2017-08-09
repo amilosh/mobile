@@ -25,6 +25,13 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private List<Role> roles = new ArrayList<Role>();
 
+    @OneToOne (mappedBy = "user")
+    private PhoneNumber phoneNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "tariff_id")
+    private Tariff tariff;
+
     public User() {
     }
 
@@ -69,4 +76,19 @@ public class User {
         this.roles = roles;
     }
 
+    public PhoneNumber getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(PhoneNumber phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Tariff getTariff() {
+        return tariff;
+    }
+
+    public void setTariff(Tariff tariff) {
+        this.tariff = tariff;
+    }
 }
