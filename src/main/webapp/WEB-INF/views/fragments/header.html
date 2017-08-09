@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -19,13 +20,21 @@
                 <a class="navbar-brand" href="#" style="background-color:white;">Logo</a>
             </div>
             <div class="collapse navbar-collapse" id="headerNavbar">
-                <!--<form class="navbar-form navbar-right">-->
-                    <!--<button type="submit" class="btn btn-success">Вход</button>-->
-                    <!--<button type="submit" class="btn btn-info">Регистрация</button>-->
-                <!--</form>-->
                 <div class="navbar-form navbar-right">
-                    <a href="/login"><button type="submit" class="btn btn-success">Вход</button></a>
-                    <a href="/registration"><button type="submit" class="btn btn-info">Регистрация</button></a>
+                    <div th:if="${#authorization.expression('!isAuthenticated()')}">
+                        <a href="/login"><button type="submit" class="btn btn-success">Вход</button></a>
+                        <a href="/registration"><button type="submit" class="btn btn-info">Регистрация</button></a>
+                    </div>
+                    <div th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a href="/user"><button type="submit" class="btn btn-success"><span sec:authentication="name">Авторизован</span></button></a>
+                        <!--<<form th:action="@{/logout}" method="post" style="display: inline-block;">-->
+                            <!--<input type="submit" value="Logout" class="btn btn-info">-->
+                        <!--</form>-->
+                        <form th:action="@{/logout}" method="post" style="display: inline-block">
+                            <input type="submit" value="Logout" class="btn btn-info">
+                        </form>
+                        <!--<a href="/logout"><button type="submit" class="btn btn-info">Выйти</button></a>-->
+                    </div>
                 </div>
             </div>
         </div>

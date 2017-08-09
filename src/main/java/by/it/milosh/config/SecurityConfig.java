@@ -23,17 +23,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/", "/hello", "/addUser", "/registration").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasRole("USER")
-                .anyRequest().authenticated()
-                .and()
+                    .antMatchers("/", "/hello", "/addUser", "/registration").permitAll()
+                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/user/**").hasRole("USER")
+                    .anyRequest().authenticated()
+                    .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout().permitAll()
-                .and()
+                    .loginPage("/login")
+                    .permitAll()
+                    .and()
+                .logout()
+                    .logoutUrl("/logout").permitAll()
+                    .logoutSuccessUrl("/").permitAll()
+                    .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 
     }
