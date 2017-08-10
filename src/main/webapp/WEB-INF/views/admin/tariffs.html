@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Admin | Numbers</title>
+    <title>Admin | Tariffs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -42,52 +42,60 @@
 <div class="container" style="background-color:#C7FCEC; padding-right: 0px; padding-left: 0px;">
     <div class="col-sm-8 text-left">
         <br/><br/>
-        <p>Номера телефонов</p>
+        <p>Тарифы</p>
     </div>
 
-    <h2>Numbers</h2>
+    <h2>Tariffs</h2>
     <table class="table table-bordered">
         <thead>
         <tr>
             <th>Id</th>
-            <th>Number</th>
-            <th>User</th>
+            <th>Name</th>
+            <th>Cost per month</th>
+            <th>Cost per minute</th>
         </tr>
         </thead>
         <tbody>
-            <th:block th:each="phoneNumber : ${phoneNumbers}">
-                <tr>
-                    <td th:text="${phoneNumber.phoneNumber_id}">...</td>
-                    <td th:text="${phoneNumber.number}">...</td>
-                    <td th:text="${phoneNumber.used}">...</td>
-                </tr>
-            </th:block>
+        <th:block th:each="tariff : ${tariffs}">
+            <tr>
+                <td th:text="${tariff.tariff_id}">...</td>
+                <td th:text="${tariff.tariffName}">...</td>
+                <td th:text="${tariff.costPerMonth}">...</td>
+                <td th:text="${tariff.costPerMinute}">...</td>
+            </tr>
+        </th:block>
         </tbody>
     </table>
 
     <br/><br/>
 
-    <h2>Добавить номер</h2>
-    <form action="#" th:action="@{/admin/addNumber}" th:object="${phoneNumber}" method="post">
-
-
-    </form>
-
     <div class="panel panel-default" style="margin-top: 45px">
         <div class="panel-heading">
-            <h3 class="panel-title">REGISTRATION</h3>
+            <h3 class="panel-title">Add Tariff</h3>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" name="form" th:action="@{/admin/addNumber}" th:object="${phoneNumber}" method="post">
+            <form class="form-horizontal" name="form" th:action="@{/admin/addTariff}" th:object="${tariff}" method="post">
                 <div class="form-group">
-                    <label for="number" class="col-sm-2 control-label">Number</label>
+                    <label for="tariffName" class="col-sm-2 control-label">Tariff name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="number" placeholder="Number" th:field="*{number}"/>
+                        <input type="text" class="form-control" id="tariffName" placeholder="Tariff name" th:field="*{tariffName}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="costPerMonth" class="col-sm-2 control-label">Cost per month</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="costPerMonth" placeholder="Cost per month" th:field="*{costPerMonth}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="costPerMinute" class="col-sm-2 control-label">Cost per minute</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="costPerMinute" placeholder="Cost per minute" th:field="*{costPerMinute}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" name="save" class="btn btn-default">Добавить номер</button>
+                        <button type="submit" name="save" class="btn btn-default">Добавить тариф</button>
                     </div>
                 </div>
             </form>
