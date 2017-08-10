@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Main</title>
+    <title>Main | Tariffs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -27,8 +27,7 @@
             </div>
             <div class="collapse navbar-collapse" id="navigationNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Тарифы</a></li>
-                    <li><a href="#">Услуги</a></li>
+                    <li><a href="/main/tariffs">Тарифы</a></li>
                 </ul>
             </div>
         </div>
@@ -39,17 +38,27 @@
 <!-- Body -->
 <div class="container" style="background-color:#C7FCEC; padding-right: 0px; padding-left: 0px;">
     <div class="col-sm-8 text-left">
-        <h1>Main</h1>
+        <h3>К вашим услугам предлагаем следующие тарифы:</h3>
 
-        <a href="/hello">Перейти на hello</a>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Cost per month</th>
+                <th>Cost per minute</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="tariff : ${tariffs}">
+                <tr>
+                    <td th:text="${tariff.tariffName}">...</td>
+                    <td th:text="${tariff.costPerMonth}">...</td>
+                    <td th:text="${tariff.costPerMinute}">...</td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
 
-        <a href="/addUser">Добавить юзера</a> <br/><br/>
-
-        <a href="/user">ЮЗЕР</a> <br/><br/>
-
-        <a href="/admin">АДМИН</a> <br/><br/>
-
-        <a href="/registration">Регистрация</a> <br/><br/>
     </div>
 </div>
 

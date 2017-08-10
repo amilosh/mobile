@@ -21,7 +21,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" style="background-color:white;">Logo</a>
+            <a class="navbar-brand" href="/">Mobile</a>
         </div>
     </div>
 </div>
@@ -43,7 +43,7 @@
                     <div th:if="${error}">
                         <div class="alert alert-danger" role="alert">Invalid Username or Password</div>
                     </div>
-                    <form class="form-horizontal" name="form" th:action="@{/login}" method="post">
+                    <form class="form-horizontal" name="form" th:action="@{/main/login}" method="post">
                         <div class="form-group">
                             <label for="username" class="col-sm-2 control-label">Username</label>
                             <div class="col-sm-10">

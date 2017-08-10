@@ -23,13 +23,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/hello", "/addUser", "/registration").permitAll()
+                    .antMatchers("/", "/hello", "/addUser", "/registration", "/main/**").permitAll()
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/user/**").hasRole("USER")
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
-                    .loginPage("/login")
+                    .loginPage("/main/login")
                     .permitAll()
                     .and()
                 .logout()

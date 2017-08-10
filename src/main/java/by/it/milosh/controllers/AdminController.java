@@ -28,6 +28,11 @@ public class AdminController {
     @Autowired
     private TariffService tariffService;
 
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String admin() {
+        return "admin/admin";
+    }
+
     @RequestMapping(value = "/numbers", method = RequestMethod.GET)
     public String numbers(Model model) {
         List<PhoneNumber> phoneNumbers = new ArrayList<PhoneNumber>();
