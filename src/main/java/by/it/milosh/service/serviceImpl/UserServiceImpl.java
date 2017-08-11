@@ -58,6 +58,10 @@ public class UserServiceImpl implements UserService {
         phoneNumber.setUser(user);
         phoneNumber.setUsed(true);
         phoneNumberRepository.save(phoneNumber);
+    }
 
+    @Override
+    public Long numberOfUsers() {
+        return userRepository.numberOfUsers();
     }
 }

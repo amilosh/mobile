@@ -11,4 +11,6 @@ public interface UserService extends BaseService<User> {
 
     void addNumberToUser(User user, PhoneNumber phoneNumber);
 
+    Long numberOfUsers();
+
 }

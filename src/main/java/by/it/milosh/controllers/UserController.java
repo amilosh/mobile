@@ -58,4 +58,22 @@ public class UserController {
         return "redirect:/user";
     }
 
+    @RequestMapping(value = "changeTariff", method = RequestMethod.GET)
+    public String changeTariff(Model model, Principal principal) {
+        User user = userService.findUserByUsername(principal.getName());
+        model.addAttribute("user", user);
+        List<Tariff> tariffs = tariffService.findAll();
+        model.addAttribute("tariffs", tariffs);
+        model.addAttribute("tariff", new Tariff());
+        return "user/changeTariff";
+    }
+
+    @RequestMapping(value = "/changeTariff", params = {"changeTariff"}, method = RequestMethod.POST)
+    public String changeTariff(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br, Principal principal) {
+        User user = userService.findUserByUsername(principal.getName());
+        Long tar_id = tariff.getTariff_id();
+        userService.addTariffToUser(user, tar_id);
+        return "redirect:/user";
+    }
+
 }

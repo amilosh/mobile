@@ -27,10 +27,8 @@
             </div>
             <div class="collapse navbar-collapse" id="navigationNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="/admin">Главная</a></li>
-                    <li><a href="/admin/numbers">Номера</a></li>
-                    <li><a href="/admin/tariffs">Тарифы</a></li>
-                    <li><a href="/admin/abonents">Абоненты</a></li>
+                    <li><a href="#">Тарифы</a></li>
+                    <li><a href="#">Услуги</a></li>
                 </ul>
             </div>
         </div>
@@ -41,8 +39,39 @@
 <!-- Body -->
 <div class="container" style="background-color:#C7FCEC; padding-right: 0px; padding-left: 0px;">
     <div class="col-sm-8 text-left">
-        <br/><br/>
-        <p>Количество абонентов: <span th:text="${numberOfUsers}">...</span></p>
+        <h1>CHANGE TARIFF</h1>
+
+        Ваш тариф: <span th:text="${user.tariff.tariffName}">User Description</span><br/><br/>
+
+        <form name="formConnect" action="#" th:action="@{/user/changeTariff}" method="post" th:object="${tariff}">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Tariff</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="tar : ${tariffs}">
+                    <div th:if="${tar.tariffName} != ${user.tariff.tariffName}">
+                        <tr>
+                            <td>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" th:field="*{tariff_id}" th:value="${tar.tariff_id}" th:text="${tar.tariffName}"/>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </div>
+                </th:block>
+                </tbody>
+            </table>
+            <button type="submit" name="changeTariff" class="btn btn-default">Сменить тарифф</button>
+        </form>
+
+
+
+
     </div>
 </div>
 

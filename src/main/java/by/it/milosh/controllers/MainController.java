@@ -108,7 +108,7 @@ public class MainController {
     public String personal(Principal principal) {
         String name = principal.getName();
         if(name.equals("admin")) {
-            return "admin/admin";
+            return "redirect:/admin";
         } else {
             return "redirect:/user";
         }
