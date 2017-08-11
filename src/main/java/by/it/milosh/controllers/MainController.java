@@ -110,7 +110,7 @@ public class MainController {
         if(name.equals("admin")) {
             return "admin/admin";
         } else {
-            return "user/user";
+            return "redirect:/user";
         }
     }
 

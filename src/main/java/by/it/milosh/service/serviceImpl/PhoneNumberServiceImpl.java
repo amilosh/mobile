@@ -28,4 +28,9 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     public List<PhoneNumber> findAll() {
         return phoneNumberRepository.findAll();
     }
+
+    @Override
+    public List<PhoneNumber> findAllUnusedNumbers() {
+        return phoneNumberRepository.findAllUnusedNumbers();
+    }
 }
