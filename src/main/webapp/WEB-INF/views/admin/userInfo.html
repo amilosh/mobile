@@ -15,8 +15,8 @@
 </div>
 
 <!-- Navigation -->
-<div class="container" style="background-color:#6495ED; padding-right: 0px; padding-left: 0px;">
-    <div class="navbar navbar-inverse" style="margin-bottom:0px;">
+<div class="container" style="padding-right: 0px; padding-left: 0px;">
+    <div class="navbar navbar-default" style="margin-bottom:0px;">
         <div class="container-fluid" style="padding-left: 0px;">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationNavbar">
@@ -27,10 +27,10 @@
             </div>
             <div class="collapse navbar-collapse" id="navigationNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="/admin">Главная</a></li>
-                    <li><a href="/admin/numbers">Номера</a></li>
-                    <li><a href="/admin/tariffs">Тарифы</a></li>
-                    <li><a href="/admin/abonents">Абоненты</a></li>
+                    <li><a href="/admin">Main</a></li>
+                    <li><a href="/admin/numbers">Numbers</a></li>
+                    <li><a href="/admin/tariffs">Tariffs</a></li>
+                    <li><a href="/admin/abonents">Abonents</a></li>
                 </ul>
             </div>
         </div>
@@ -39,16 +39,12 @@
 
 
 <!-- Body -->
-<div class="container" style="background-color:#C7FCEC; padding-right: 0px; padding-left: 0px;">
-    <div class="col-sm-8 text-left">
-        <br/><br/>
-        <p>USER INFO</p>
-    </div>
+<div class="container" style="background-color:#C7FCEC;">
 
     User Id: <span th:text="${user.user_id}">...</span><br/><br/>
     Username: <span th:text="${user.username}">...</span><br/><br/>
     Phone Number: <span th:text="${user.phoneNumber.number}">...</span><br/><br/>
-    Tariff: <span th:text="${user.tariff.tariffName}">...</span><br/><br/>
+    Tariff: <span th:text="${user.tariff.tariffName}">...</span>
 
 </div>
 

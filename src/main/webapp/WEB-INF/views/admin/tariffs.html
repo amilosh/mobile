@@ -4,7 +4,8 @@
     <meta charset="UTF-8"/>
     <title>Admin | Tariffs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -15,8 +16,8 @@
 </div>
 
 <!-- Navigation -->
-<div class="container" style="background-color:#6495ED; padding-right: 0px; padding-left: 0px;">
-    <div class="navbar navbar-inverse" style="margin-bottom:0px;">
+<div class="container" style="padding-right: 0px; padding-left: 0px;">
+    <div class="navbar navbar-default" style="margin-bottom:0px;">
         <div class="container-fluid" style="padding-left: 0px;">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationNavbar">
@@ -27,10 +28,10 @@
             </div>
             <div class="collapse navbar-collapse" id="navigationNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="/admin">Главная</a></li>
-                    <li><a href="/admin/numbers">Номера</a></li>
-                    <li><a href="/admin/tariffs">Тарифы</a></li>
-                    <li><a href="/admin/abonents">Абоненты</a></li>
+                    <li><a href="/admin">Main</a></li>
+                    <li><a href="/admin/numbers">Numbers</a></li>
+                    <li><a href="/admin/tariffs">Tariffs</a></li>
+                    <li><a href="/admin/abonents">Abonents</a></li>
                 </ul>
             </div>
         </div>
@@ -39,39 +40,11 @@
 
 
 <!-- Body -->
-<div class="container" style="background-color:#C7FCEC; padding-right: 0px; padding-left: 0px;">
-    <div class="col-sm-8 text-left">
-        <br/><br/>
-        <p>Тарифы</p>
-    </div>
+<div class="container" style="background-color:#C7FCEC;">
 
-    <h2>Tariffs</h2>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Cost per month</th>
-            <th>Cost per minute</th>
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="tariff : ${tariffs}">
-            <tr>
-                <td th:text="${tariff.tariff_id}">...</td>
-                <td th:text="${tariff.tariffName}">...</td>
-                <td th:text="${tariff.costPerMonth}">...</td>
-                <td th:text="${tariff.costPerMinute}">...</td>
-            </tr>
-        </th:block>
-        </tbody>
-    </table>
-
-    <br/><br/>
-
-    <div class="panel panel-default" style="margin-top: 45px">
+    <div class="panel panel-default" style="margin-top: 20px">
         <div class="panel-heading">
-            <h3 class="panel-title">Add Tariff</h3>
+            <h3 class="panel-title">ADD TARIFF</h3>
         </div>
         <div class="panel-body">
             <form class="form-horizontal" name="form" th:action="@{/admin/addTariff}" th:object="${tariff}" method="post">
@@ -95,12 +68,38 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" name="save" class="btn btn-default">Добавить тариф</button>
+                        <button type="submit" name="save" class="btn btn-default">Add tariff</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
+    <h3>Tariffs:</h3>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Cost per month</th>
+            <th>Cost per minute</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="tariff : ${tariffs}">
+            <tr>
+                <td th:text="${tariff.tariff_id}">...</td>
+                <td th:text="${tariff.tariffName}">...</td>
+                <td th:text="${tariff.costPerMonth}">...</td>
+                <td th:text="${tariff.costPerMinute}">...</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+
+    <br/><br/>
+
+
 
 
 </div>

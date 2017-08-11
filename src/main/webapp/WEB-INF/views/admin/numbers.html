@@ -4,7 +4,8 @@
     <meta charset="UTF-8"/>
     <title>Admin | Numbers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -15,8 +16,8 @@
 </div>
 
 <!-- Navigation -->
-<div class="container" style="background-color:#6495ED; padding-right: 0px; padding-left: 0px;">
-    <div class="navbar navbar-inverse" style="margin-bottom:0px;">
+<div class="container" style="padding-right: 0px; padding-left: 0px;">
+    <div class="navbar navbar-default" style="margin-bottom:0px;">
         <div class="container-fluid" style="padding-left: 0px;">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationNavbar">
@@ -27,10 +28,10 @@
             </div>
             <div class="collapse navbar-collapse" id="navigationNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="/admin">Главная</a></li>
-                    <li><a href="/admin/numbers">Номера</a></li>
-                    <li><a href="/admin/tariffs">Тарифы</a></li>
-                    <li><a href="/admin/abonents">Абоненты</a></li>
+                    <li><a href="/admin">Main</a></li>
+                    <li><a href="/admin/numbers">Numbers</a></li>
+                    <li><a href="/admin/tariffs">Tariffs</a></li>
+                    <li><a href="/admin/abonents">Abonents</a></li>
                 </ul>
             </div>
         </div>
@@ -39,13 +40,31 @@
 
 
 <!-- Body -->
-<div class="container" style="background-color:#C7FCEC; padding-right: 0px; padding-left: 0px;">
-    <div class="col-sm-8 text-left">
-        <br/><br/>
-        <p>Номера телефонов</p>
+<div class="container" style="background-color:#C7FCEC;">
+
+    <div class="panel panel-default" style="margin-top: 20px">
+        <div class="panel-heading">
+            <h3 class="panel-title">ADD PHONE NUMBER</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="form" th:action="@{/admin/addNumber}" th:object="${phoneNumber}" method="post">
+                <div class="form-group">
+                    <label for="number" class="col-sm-2 control-label">Number</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="number" placeholder="Number" th:field="*{number}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" name="save" class="btn btn-default">Add number</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <h2>Numbers</h2>
+    <h3>Phone numbers:</h3>
+
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -67,32 +86,7 @@
 
     <br/><br/>
 
-    <h2>Добавить номер</h2>
-    <form action="#" th:action="@{/admin/addNumber}" th:object="${phoneNumber}" method="post">
 
-
-    </form>
-
-    <div class="panel panel-default" style="margin-top: 45px">
-        <div class="panel-heading">
-            <h3 class="panel-title">REGISTRATION</h3>
-        </div>
-        <div class="panel-body">
-            <form class="form-horizontal" name="form" th:action="@{/admin/addNumber}" th:object="${phoneNumber}" method="post">
-                <div class="form-group">
-                    <label for="number" class="col-sm-2 control-label">Number</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="number" placeholder="Number" th:field="*{number}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" name="save" class="btn btn-default">Добавить номер</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
 
 
 </div>
