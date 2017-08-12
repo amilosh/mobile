@@ -10,7 +10,6 @@ import by.it.milosh.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,8 +41,10 @@ public class MainController {
     @Autowired
     private SecurityService securityService;
 
+    /*
     @Autowired
     private PasswordEncoder passwordEncoder;
+    */
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String main() {
@@ -95,7 +96,7 @@ public class MainController {
         }
         Role role = roleService.getById(2L);
         user.getRoles().add(role);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.add(user);
         securityService.autoLogin(user.getUsername(), user.getPassword());
 
