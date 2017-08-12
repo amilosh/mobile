@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -25,10 +26,13 @@ public class AuthenticationService implements UserDetailsService {
     @Autowired
     private RoleService roleService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @PostConstruct
     public void init() {
         if (userService.findUserByUsername("admin") == null) {
-            User newUser = new User("admin", "admin");
+            User newUser = new User("admin", passwordEncoder.encode("admin"));
             userService.add(newUser);
 
             Role newRole_1 = new Role("ROLE_ADMIN");
