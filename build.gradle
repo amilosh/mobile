@@ -16,10 +16,9 @@ apply plugin: 'spring-boot'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-version = '1.0'
 
 war {
-    baseName = 'Mobile'
+    baseName = 'mobile'
 }
 
 repositories {
