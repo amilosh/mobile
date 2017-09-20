@@ -22,11 +22,11 @@
             <div class="collapse navbar-collapse" id="headerNavbar">
                 <div class="navbar-form navbar-right">
                     <div th:if="${#authorization.expression('!isAuthenticated()')}">
-                        <a href="/main/login"><button type="submit" class="btn btn-success">Вход</button></a>
-                        <a href="/main/registration"><button type="submit" class="btn btn-info">Регистрация</button></a>
+                        <a href="/main/login"><button type="submit" class="btn btn-success">Lig in</button></a>
+                        <a href="/main/registration"><button type="submit" class="btn btn-info">Registration</button></a>
                     </div>
                     <div th:if="${#authorization.expression('isAuthenticated()')}">
-                        <a href="/main/personal"><button type="submit" class="btn btn-success"><span sec:authentication="name">Авторизован</span></button></a>
+                        <a href="/main/personal"><button type="submit" class="btn btn-success"><span sec:authentication="name">Authorized</span></button></a>
                         <form th:action="@{/logout}" method="post" style="display: inline-block">
                             <input type="submit" value="Logout" class="btn btn-info">
                         </form>
