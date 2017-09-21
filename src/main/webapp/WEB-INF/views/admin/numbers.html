@@ -28,10 +28,10 @@
             </div>
             <div class="collapse navbar-collapse" id="navigationNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="/admin">Main</a></li>
-                    <li><a href="/admin/numbers">Numbers</a></li>
-                    <li><a href="/admin/tariffs">Tariffs</a></li>
-                    <li><a href="/admin/abonents">Abonents</a></li>
+                    <li><a th:href="@{/admin}">Main</a></li>
+                    <li class="active"><a th:href="@{/admin/numbers}">Numbers</a></li>
+                    <li><a th:href="@{/admin/tariffs}">Tariffs</a></li>
+                    <li><a th:href="@{/admin/abonents}">Abonents</a></li>
                 </ul>
             </div>
         </div>
@@ -40,7 +40,7 @@
 
 
 <!-- Body -->
-<div class="container" style="background-color:#C7FCEC;">
+<div class="container">
 
     <div class="panel panel-default" style="margin-top: 20px">
         <div class="panel-heading">
