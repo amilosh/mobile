@@ -1,5 +1,4 @@
 # Mobile
-======
 
 *App for managing Tariffs and joining to mobile operator network for customers.*
 
