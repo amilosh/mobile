@@ -51,18 +51,6 @@ public class MainController {
         return "main/main";
     }
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello() {
-        return "main/hello";
-    }
-
-    @RequestMapping(value = "/addUser", method = RequestMethod.GET)
-    public String addUser() {
-        User user = new User("sasha");
-        userService.add(user);
-        return "main/hello";
-    }
-
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user() {
         return "main/user";
@@ -108,6 +96,16 @@ public class MainController {
         List<Tariff> tariffs = tariffService.findAll();
         model.addAttribute("tariffs", tariffs);
         return "main/tariffs";
+    }
+
+    @RequestMapping(value = "services", method = RequestMethod.GET)
+    public String services(Model model) {
+        return "main/services";
+    }
+
+    @RequestMapping(value = "internet", method = RequestMethod.GET)
+    public String internet(Model model) {
+        return "main/internet";
     }
 
     @RequestMapping(value = "/personal", method = RequestMethod.GET)

@@ -10,9 +10,20 @@ buildscript {
     }
 }
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.3'
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'spring-boot'
+apply plugin: 'com.bmuschko.tomcat-base'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -22,6 +33,7 @@ war {
 }
 
 repositories {
+    jcenter()
     mavenLocal()
     mavenCentral()
 }
@@ -36,6 +48,13 @@ dependencies {
     compile('mysql:mysql-connector-java:5.1.28')
 
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+}
+
+dependencies {
+    def tomcatVersion = '8.0.42'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }
 
 task wrapper(type: Wrapper) {

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/images/mobile_ico.jpg}">
 
 </head>
 <body>
@@ -14,29 +15,8 @@
 <div th:replace="fragments/header :: header">
 </div>
 
-<!-- Navigation -->
-<div class="container" style="padding-right: 0px; padding-left: 0px;">
-    <div class="navbar navbar-default" style="margin-bottom:0px;">
-        <div class="container-fluid" style="padding-left: 0px;">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="navigationNavbar">
-                <ul class="nav navbar-nav">
-                    <li><a th:href="@{/main/tariffs}">Tariffs</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <!-- Body -->
-<div class="container" style="background-color:#C7FCEC;">
+<div class="container">
 
         <h3>We offer the following tariffs:</h3>
 
@@ -58,6 +38,9 @@
             </th:block>
             </tbody>
         </table>
+
+    <div th:replace="fragments/footer :: footer">
+    </div>
 
 </div>
 

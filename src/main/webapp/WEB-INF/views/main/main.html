@@ -28,7 +28,7 @@
 
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-3">Welcome!</h1>
+        <h1 class="display-3">Welcome! gradle</h1>
         <p>Welcome to the start page of the telecommunications company "Mobile". We provide cellular services in GSM and LTE standards, wireline telephone services, broadband Internet access, mobile television, cable television, satellite television, digital television and related services, in particular content sales services.</p>
         <p><a href="#" class="btn btn-primary btn-lg">Reed more &raquo;</a></p>
     </div>
@@ -39,24 +39,23 @@
         <div class="col-md-4">
             <h2>Tariffs</h2>
             <p>Read the tariffs that our company provides.</p>
-            <p><a href="#" class="btn btn-default">Reed more &raquo;</a></p>
+            <p><a th:href="@{/main/tariffs}" class="btn btn-default">Reed more &raquo;</a></p>
         </div>
         <div class="col-md-4">
             <h2>Services</h2>
             <p>See the services that our company provides.</p>
-            <p><a href="#" class="btn btn-default">Reed more &raquo;</a></p>
+            <p><a th:href="@{/main/services}" class="btn btn-default">Reed more &raquo;</a></p>
         </div>
         <div class="col-md-4">
             <h2>Mobile Internet</h2>
             <p>We provide mobile internet traps. The coverage area is 85% of the country's area, and covers 95% of the population. The network supports the third generation (3G) data transfer.</p>
-            <p><a href="#" class="btn btn-default">Reed more &raquo;</a></p>
+            <p><a th:href="@{/main/internet}" class="btn btn-default">Reed more &raquo;</a></p>
         </div>
     </div>
 
-    <hr>
-    <footer>
-        <p>© Mobile 2017</p>
-    </footer>
+    <div th:replace="fragments/footer :: footer">
+    </div>
+
 </div>
 
 </body>
