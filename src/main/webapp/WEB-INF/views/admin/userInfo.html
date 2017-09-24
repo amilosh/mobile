@@ -9,11 +9,10 @@
 </head>
 <body>
 
-<div th:replace="fragments/header :: header">
+<div th:replace="fragments/headerAdmin :: headerAdmin">
 </div>
 
-<!-- Navigation -->
-<div class="container" style="padding-right: 0px; padding-left: 0px;">
+<nav class="container" style="padding-right: 0px; padding-left: 0px;" th:fragment="adminNavbar">
     <div class="navbar navbar-default" style="margin-bottom:0px;">
         <div class="container-fluid" style="padding-left: 0px;">
             <div class="navbar-header">
@@ -29,12 +28,12 @@
                     <li><a th:href="@{/admin/numbers}">Numbers</a></li>
                     <li><a th:href="@{/admin/tariffs}">Tariffs</a></li>
                     <li><a th:href="@{/admin/abonents}">Abonents</a></li>
-                    <li class="active"><a>User Info</a></li>
+                    <li class="active"><a th:href="@{/admin/userInfo}">User Info</a></li>
                 </ul>
             </div>
         </div>
     </div>
-</div>
+</nav>
 
 
 <!-- Body -->
