@@ -33,47 +33,37 @@
     </div>
 </div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>USER connect</h1>
+            <form name="formConnect" th:action="@{/user/connect}" method="post" th:object="${tariff}">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Tariff</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="tar : ${tariffs}">
+                        <tr>
+                            <td>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" th:field="*{tariff_id}" th:value="${tar.tariff_id}" th:text="${tar.tariffName}"/>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+                <button type="submit" name="connect" class="btn btn-default">Connect</button>
+            </form>
+        </div>
+        <div class="col-md-4">
 
-<!-- Body -->
-<div class="container" style="padding-right: 0px; padding-left: 0px;">
-    <div class="col-sm-8 text-left">
-        <h1>USER connect</h1>
-
-        <!--<ul>-->
-            <!--<li th:each="tariff : ${tariffs}">-->
-                <!--<input type="radio" th:field="*{}" th:text="${tariff.tariffName}" th:value="${tariff.tariff_id}"/>-->
-                <!--<label th:for="${#ids.prev('tariff')}">...</label>-->
-            <!--</li>-->
-        <!--</ul>-->
-
-        <!--<form name="formConnect" action="#" th:action="@{/user/connect}" method="post" th:object="${tariff}">-->
-            <!--<input type="radio" th:field="*{tariff_id}" th:each="tar : ${tariffs}" th:value="${tar.tariff_id}" th:text="${tar.tariffName}"/><br>-->
-            <!--<button type="submit" name="connect" class="btn btn-default">Connect</button>-->
-        <!--</form>-->
-
-        <form name="formConnect" action="#" th:action="@{/user/connect}" method="post" th:object="${tariff}">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Tariff</th>
-            </tr>
-            </thead>
-            <tbody>
-            <th:block th:each="tar : ${tariffs}">
-                <tr>
-                    <td>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" th:field="*{tariff_id}" th:value="${tar.tariff_id}" th:text="${tar.tariffName}"/>
-                            </label>
-                        </div>
-                    </td>
-                </tr>
-            </th:block>
-            </tbody>
-        </table>
-            <button type="submit" name="connect" class="btn btn-default">Connect</button>
-        </form>
+        </div>
     </div>
 
     <div th:replace="fragments/footer :: footer">
