@@ -1,9 +1,11 @@
 package by.it.milosh.controllers;
 
 import by.it.milosh.config.SecurityService;
+import by.it.milosh.model.CheckInitAdmin;
 import by.it.milosh.model.Role;
 import by.it.milosh.model.Tariff;
 import by.it.milosh.model.User;
+import by.it.milosh.service.service.CheckInitAdminService;
 import by.it.milosh.service.service.RoleService;
 import by.it.milosh.service.service.TariffService;
 import by.it.milosh.service.service.UserService;
@@ -40,6 +42,9 @@ public class MainController {
 
     @Autowired
     private SecurityService securityService;
+
+    @Autowired
+    private CheckInitAdminService checkInitAdminService;
 
     /*
     @Autowired
@@ -93,6 +98,11 @@ public class MainController {
 
     @RequestMapping(value = "tariffs", method = RequestMethod.GET)
     public String tariffs(Model model) {
+        List<CheckInitAdmin> checkInitAdmins = checkInitAdminService.findAll();
+        if (checkInitAdmins.isEmpty()) {
+            System.out.println("empty");
+        }
+
         List<Tariff> tariffs = tariffService.findAll();
         model.addAttribute("tariffs", tariffs);
         return "main/tariffs";
@@ -111,11 +121,20 @@ public class MainController {
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
     public String personal(Principal principal) {
         String name = principal.getName();
+        User user = userService.findUserByUsername(name);
+        Long user_id = user.getUser_id();
+        if(user_id == 1L) {
+            return "redirect:/admin";
+        } else {
+            return "redirect:/user";
+        }
+        /* было
         if(name.equals("admin")) {
             return "redirect:/admin";
         } else {
             return "redirect:/user";
         }
+        */
     }
 
 }

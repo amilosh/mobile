@@ -3,6 +3,7 @@ package by.it.milosh.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "phone_number")
 public class PhoneNumber {
 
     @Id

@@ -30,27 +30,6 @@ public class AuthenticationService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
     */
 
-    @PostConstruct
-    public void init() {
-        if (userService.findUserByUsername("admin") == null) {
-            User newUser = new User("admin","admin");
-            //User newUser = new User("admin", passwordEncoder.encode("admin"));
-            userService.add(newUser);
-
-            Role newRole_1 = new Role("ROLE_ADMIN");
-            Role newRole_2 = new Role("ROLE_USER");
-            roleService.add(newRole_1);
-            roleService.add(newRole_2);
-
-            Role role_1 = (Role) roleService.getById(1L);
-            Role role_2 = (Role) roleService.getById(2L);
-            User user = (User) userService.getById(1L);
-            user.getRoles().add(role_1);
-            user.getRoles().add(role_2);
-            userService.add(user);
-        }
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.findUserByUsername(username);
