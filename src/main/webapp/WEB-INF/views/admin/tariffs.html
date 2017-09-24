@@ -53,28 +53,29 @@
     </div>
 
     <h3>Tariffs:</h3>
-    <table class="table table-bordered">
+    <div th:if="${tariffs.isEmpty()}">
+        The table is empty.
+    </div>
+    <table class="table table-bordered" th:if="${!tariffs.isEmpty()}">
         <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Cost per month</th>
-            <th>Cost per minute</th>
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="tariff : ${tariffs}">
             <tr>
-                <td th:text="${tariff.tariff_id}">...</td>
-                <td th:text="${tariff.tariffName}">...</td>
-                <td th:text="${tariff.costPerMonth}">...</td>
-                <td th:text="${tariff.costPerMinute}">...</td>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Cost per month</th>
+                <th>Cost per minute</th>
             </tr>
-        </th:block>
+            </thead>
+        <tbody>
+            <th:block th:each="tariff : ${tariffs}">
+                <tr>
+                    <td th:text="${tariff.tariff_id}">...</td>
+                    <td th:text="${tariff.tariffName}">...</td>
+                    <td th:text="${tariff.costPerMonth}">...</td>
+                    <td th:text="${tariff.costPerMinute}">...</td>
+                </tr>
+            </th:block>
         </tbody>
     </table>
-
-    <br/><br/>
 
     <div th:replace="fragments/footer :: footer">
     </div>

@@ -15,8 +15,12 @@
 <!-- Body -->
 <div class="container">
 
-        <h3>We offer the following tariffs:</h3>
+    <h3>We offer the following tariffs:</h3>
 
+    <div th:if="${tariffs.isEmpty()}">
+        The table is empty.
+    </div>
+    <div th:if="${!tariffs.isEmpty()}">
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -35,6 +39,7 @@
             </th:block>
             </tbody>
         </table>
+    </div>
 
     <div th:replace="fragments/footer :: footer">
     </div>

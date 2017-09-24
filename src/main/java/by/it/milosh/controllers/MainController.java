@@ -98,11 +98,6 @@ public class MainController {
 
     @RequestMapping(value = "tariffs", method = RequestMethod.GET)
     public String tariffs(Model model) {
-        List<CheckInitAdmin> checkInitAdmins = checkInitAdminService.findAll();
-        if (checkInitAdmins.isEmpty()) {
-            System.out.println("empty");
-        }
-
         List<Tariff> tariffs = tariffService.findAll();
         model.addAttribute("tariffs", tariffs);
         return "main/tariffs";
