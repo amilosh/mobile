@@ -11,7 +11,7 @@ public class PhoneNumber {
     @Column(name = "phoneNumber_id")
     private Long phoneNumber_id;
 
-    @Column(name = "number")
+    @Column(name = "number", unique = true, nullable = false)
     private Integer number;
 
     @Column(name = "used")

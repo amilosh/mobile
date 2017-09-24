@@ -13,7 +13,7 @@ public class Role {
     @Column(name = "role_id")
     private Long role_id;
 
-    @Column(name = "roleName")
+    @Column(name = "roleName", unique = true, nullable = false)
     private String roleName;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})

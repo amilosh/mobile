@@ -12,13 +12,13 @@ public class Tariff {
     @Column(name = "tariff_id")
     private Long tariff_id;
 
-    @Column(name = "tariffName")
+    @Column(name = "tariffName", unique = true, nullable = false)
     private String tariffName;
 
-    @Column(name = "costPerMonth")
+    @Column(name = "costPerMonth", nullable = false)
     private Integer costPerMonth;
 
-    @Column(name = "costPerMinute")
+    @Column(name = "costPerMinute", nullable = false)
     private Integer costPerMinute;
 
     @OneToMany(mappedBy = "tariff")
