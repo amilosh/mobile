@@ -34,6 +34,8 @@ public class UserController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String personal(Principal principal, Model model) {
         User user = userService.findUserByUsername(principal.getName());
+        int numberOfTariffs = tariffService.findAll().size();
+        model.addAttribute("numberOfTariffs", numberOfTariffs);
         model.addAttribute("user", user);
 
         return "user/user";
