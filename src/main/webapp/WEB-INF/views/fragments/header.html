@@ -15,9 +15,9 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a th:href="@{/main/tariffs}">Tariffs</a></li>
-                    <li><a th:href="@{/main/services}">Services</a></li>
-                    <li><a th:href="@{/main/internet}">Internet</a></li>
+                    <li th:classappend="${#request.requestURI == '/main/tariffs'}?active"><a th:href="@{/main/tariffs}">Tariffs</a></li>
+                    <li th:classappend="${#request.requestURI == '/main/services'}?active"><a th:href="@{/main/services}">Services</a></li>
+                    <li th:classappend="${#request.requestURI == '/main/internet'}?active"><a th:href="@{/main/internet}">Internet</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" th:if="${#authorization.expression('!isAuthenticated()')}">
                         <li><a th:href="@{/main/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
