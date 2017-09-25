@@ -32,6 +32,12 @@ public class User {
     @JoinColumn(name = "tariff_id")
     private Tariff tariff;
 
+    @ManyToMany()
+    @JoinTable(name = "user_services",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "service_id")})
+    private List<Service> services = new ArrayList<Service>();
+
     public User() {
     }
 
