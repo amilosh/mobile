@@ -16,6 +16,29 @@
 <div class="container">
 
     <h3>We offer the following services:</h3>
+    <div th:if="${services.isEmpty()}">
+        The table is empty.
+    </div>
+    <table class="table table-bordered" th:if="${!services.isEmpty()}">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Connect cost</th>
+            <th>Cost per month</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="service : ${services}">
+            <tr>
+                <td th:text="${service.serviceName}">...</td>
+                <td th:text="${service.description}">...</td>
+                <td th:text="${service.connectCost}">...</td>
+                <td th:text="${service.costPerMonth}">...</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
 
     <div th:replace="fragments/footer :: footer">
     </div>

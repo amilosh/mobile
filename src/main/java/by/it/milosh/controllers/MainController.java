@@ -1,14 +1,8 @@
 package by.it.milosh.controllers;
 
 import by.it.milosh.config.SecurityService;
-import by.it.milosh.model.CheckInitAdmin;
-import by.it.milosh.model.Role;
-import by.it.milosh.model.Tariff;
-import by.it.milosh.model.User;
-import by.it.milosh.service.service.CheckInitAdminService;
-import by.it.milosh.service.service.RoleService;
-import by.it.milosh.service.service.TariffService;
-import by.it.milosh.service.service.UserService;
+import by.it.milosh.model.*;
+import by.it.milosh.service.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,6 +34,9 @@ public class MainController {
 
     @Autowired
     private TariffService tariffService;
+
+    @Autowired
+    private ServiceService serviceService;
 
     @Autowired
     private SecurityService securityService;
@@ -105,6 +103,9 @@ public class MainController {
 
     @RequestMapping(value = "services", method = RequestMethod.GET)
     public String services(Model model) {
+        List<Service> services = new ArrayList<Service>();
+        services = serviceService.findAll();
+        model.addAttribute("services", services);
         return "main/services";
     }
 

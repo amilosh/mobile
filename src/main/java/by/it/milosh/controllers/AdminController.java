@@ -1,10 +1,8 @@
 package by.it.milosh.controllers;
 
-import by.it.milosh.model.PhoneNumber;
-import by.it.milosh.model.Role;
-import by.it.milosh.model.Tariff;
-import by.it.milosh.model.User;
+import by.it.milosh.model.*;
 import by.it.milosh.service.service.PhoneNumberService;
+import by.it.milosh.service.service.ServiceService;
 import by.it.milosh.service.service.TariffService;
 import by.it.milosh.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,9 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ServiceService serviceService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String admin(Model model) {
@@ -94,7 +95,21 @@ public class AdminController {
         User user = userService.findUserByUsername(username);
         model.addAttribute("user", user);
         return "admin/userInfo";
+    }
 
+    @RequestMapping(value = "/services", method = RequestMethod.GET)
+    public String services(Model model) {
+        List<Service> services = new ArrayList<Service>();
+        services = serviceService.findAll();
+        model.addAttribute("services", services);
+        model.addAttribute("service", new Service());
+        return "admin/services";
+    }
+
+    @RequestMapping(value = "/addService", params = {"save"}, method = RequestMethod.POST)
+    public String addService(@Valid @ModelAttribute("service") Service service, BindingResult br) {
+        serviceService.add(service);
+        return "redirect:/admin/services";
     }
 
 }
