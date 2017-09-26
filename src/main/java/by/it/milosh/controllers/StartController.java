@@ -51,6 +51,7 @@ public class StartController {
         Role role = roleService.getById(1L);
         user.getRoles().add(role);
         //user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setAccount(0);
         userService.add(user);
         checkInitAdminService.add(new CheckInitAdmin(true));
 

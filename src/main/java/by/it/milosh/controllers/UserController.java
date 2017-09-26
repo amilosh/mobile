@@ -118,4 +118,19 @@ public class UserController {
         return "redirect:/user";
     }
 
+    @RequestMapping(value = "/topUpAccount", method = RequestMethod.GET)
+    public String topUpAccount(Model model) {
+        model.addAttribute("userWrapper", new UserWrapper());
+        return "user/topUpAccount";
+    }
+
+    @RequestMapping(value = "/topUpAccount", method = RequestMethod.POST)
+    public String topUpAccount(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, Principal principal) {
+        User user = userService.findUserByUsername(principal.getName());
+        Integer newAccount = user.getAccount() + userWrapper.getAccount();
+        user.setAccount(newAccount);
+        userService.add(user);
+        return "redirect:/user";
+    }
+
 }

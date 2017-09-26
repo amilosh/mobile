@@ -38,6 +38,9 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "service_id")})
     private List<Service> services = new ArrayList<Service>();
 
+    @Column(name = "account", nullable = false)
+    private Integer account;
+
     public User() {
     }
 
@@ -104,5 +107,13 @@ public class User {
 
     public void setServices(List<Service> services) {
         this.services = services;
+    }
+
+    public Integer getAccount() {
+        return account;
+    }
+
+    public void setAccount(Integer account) {
+        this.account = account;
     }
 }

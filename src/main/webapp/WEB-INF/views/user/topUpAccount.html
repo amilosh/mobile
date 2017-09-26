@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Main</title>
+    <div th:replace="fragments/bootstrap :: bootstrap">
+    </div>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                Enter the amount for top up the account.
+            </div>
+            <br/>
+            <form name="topUpAccount" th:action="@{/user/topUpAccount}" method="post" th:object="${userWrapper}">
+                <input th:type="text" th:field="*{account}"><br/><br/>
+                <button type="submit" name="connect" class="btn btn-default">Top up</button>
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer">
+    </div>
+
+</div>
+
+</body>
+</html>
