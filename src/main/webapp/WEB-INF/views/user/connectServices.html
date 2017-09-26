@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Main</title>
+    <div th:replace="fragments/bootstrap :: bootstrap">
+    </div>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">
+</div>
+
+<!-- Body -->
+<div class="container">
+
+    <div th:if="${servicesNonUser.isEmpty()}">
+        You already have all the services connected.
+    </div>
+    <form method="post" th:object="${userWrapper}" th:action="@{/user/connectServices}" th:if="${!servicesNonUser.isEmpty()}">
+        <div>
+            Select services.
+        </div>
+        <br/>
+        <table class="table table-bordered">
+            <tr>
+                <th>Checkbox</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Connect cost</th>
+                <th>Cost per month</th>
+            </tr>
+            <th:block th:each="service : ${servicesNonUser}">
+                <tr>
+                    <td>
+                        <input type="checkbox" th:field="*{serviceId}" th:value="${service.service_id}"/>
+                    </td>
+                    <td th:text="${service.serviceName}">...</td>
+                    <td th:text="${service.description}">...</td>
+                    <td th:text="${service.connectCost}">...</td>
+                    <td th:text="${service.costPerMonth}">...</td>
+                </tr>
+            </th:block>
+        </table>
+        <input th:type="submit" th:name="save" th:value="Connect" class="btn btn-default"/>
+
+    </form>
+
+    <br/>
+
+    <div th:replace="fragments/footer :: footer">
+    </div>
+
+</div>
+
+</body>
+</html>

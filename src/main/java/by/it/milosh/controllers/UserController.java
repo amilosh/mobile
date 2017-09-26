@@ -1,9 +1,8 @@
 package by.it.milosh.controllers;
 
-import by.it.milosh.model.PhoneNumber;
-import by.it.milosh.model.Tariff;
-import by.it.milosh.model.User;
+import by.it.milosh.model.*;
 import by.it.milosh.service.service.PhoneNumberService;
+import by.it.milosh.service.service.ServiceService;
 import by.it.milosh.service.service.TariffService;
 import by.it.milosh.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -27,6 +27,9 @@ public class UserController {
 
     @Autowired
     private TariffService tariffService;
+
+    @Autowired
+    private ServiceService serviceService;
 
     @Autowired
     private PhoneNumberService phoneNumberService;
@@ -67,6 +70,8 @@ public class UserController {
         List<Tariff> tariffs = tariffService.findAll();
         model.addAttribute("tariffs", tariffs);
         model.addAttribute("tariff", new Tariff());
+
+        model.addAttribute("emptyTariff", new Tariff());
         return "user/changeTariff";
     }
 
@@ -75,6 +80,41 @@ public class UserController {
         User user = userService.findUserByUsername(principal.getName());
         Long tar_id = tariff.getTariff_id();
         userService.addTariffToUser(user, tar_id);
+        return "redirect:/user";
+    }
+
+    @RequestMapping(value = "/emptyTariff", params = {"changeTariff"}, method = RequestMethod.POST)
+    public String emptyTariff(@Valid @ModelAttribute("emptyTariff") Tariff tariff, BindingResult br, Principal principal) {
+        User user = userService.findUserByUsername(principal.getName());
+        Long tar_id = tariff.getTariff_id();
+        userService.addTariffToUser(user, tar_id);
+        return "redirect:/user";
+    }
+
+    @RequestMapping(value = "/services", method = RequestMethod.GET)
+    public String services(Model model, Principal principal) {
+        Long user_id = userService.findUserByUsername(principal.getName()).getUser_id();
+        List<Service> servicesOfUser = userService.getServicesOfUser(user_id);
+        model.addAttribute("servicesOfUser", servicesOfUser);
+        return "user/services";
+    }
+
+    @RequestMapping(value = "/connectServices", method = RequestMethod.GET)
+    public String connectServices(Model model, Principal principal) {
+        User user = userService.findUserByUsername(principal.getName());
+        List<Service> servicesNonUser = userService.getServiceNonUser(user.getUser_id());
+        model.addAttribute("servicesNonUser", servicesNonUser);
+        model.addAttribute("userWrapper", new UserWrapper());
+        return "user/connectServices";
+    }
+
+    @RequestMapping(value = "/connectServices", method = RequestMethod.POST)
+    public String connectServices(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, Principal principal) {
+        User user = userService.findUserByUsername(principal.getName());
+        List<Long> serviceIds = userWrapper.getServiceId();
+        for (Long id : serviceIds) {
+            userService.addServiceToUser(user.getUser_id(), id);
+        }
         return "redirect:/user";
     }
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Main</title>
+    <div th:replace="fragments/bootstrap :: bootstrap">
+    </div>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">
+</div>
+
+<!-- Body -->
+<div class="container">
+
+    <div th:if="${servicesOfUser.isEmpty()}">
+        You have not connected any services yet.
+    </div>
+    <br/>
+    <div  th:if="${!servicesOfUser.isEmpty()}">
+        <div>
+            Services to which you are connected.
+        </div>
+        <br/>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Connect cost</th>
+                <th>Cost per month</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="service : ${servicesOfUser}">
+                <tr>
+                    <td th:text="${service.serviceName}">...</td>
+                    <td th:text="${service.description}">...</td>
+                    <td th:text="${service.connectCost}">...</td>
+                    <td th:text="${service.costPerMonth}">...</td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+
+
+    <a th:href="@{/user/connectServices}"><button type="submit" class="btn btn-default">Connect new services</button></a>
+
+    <div th:replace="fragments/footer :: footer">
+    </div>
+
+</div>
+
+</body>
+</html>

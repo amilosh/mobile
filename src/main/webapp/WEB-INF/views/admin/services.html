@@ -21,7 +21,7 @@
 
     <div class="panel panel-default" style="margin-top: 20px">
         <div class="panel-heading">
-            <h3 class="panel-title">ADD TARIFF</h3>
+            <h3 class="panel-title">ADD SERVICE</h3>
         </div>
         <div class="panel-body">
             <form class="form-horizontal" name="form" th:action="@{/admin/addService}" th:object="${service}" method="post">
@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <h3>Tariffs:</h3>
+    <h3>Services:</h3>
     <div th:if="${services.isEmpty()}">
         The table is empty.
     </div>

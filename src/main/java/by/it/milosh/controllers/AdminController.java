@@ -99,8 +99,7 @@ public class AdminController {
 
     @RequestMapping(value = "/services", method = RequestMethod.GET)
     public String services(Model model) {
-        List<Service> services = new ArrayList<Service>();
-        services = serviceService.findAll();
+        List<Service> services = serviceService.findAll();
         model.addAttribute("services", services);
         model.addAttribute("service", new Service());
         return "admin/services";

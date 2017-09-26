@@ -4,6 +4,7 @@ import by.it.milosh.model.PhoneNumber;
 import by.it.milosh.model.Tariff;
 import by.it.milosh.model.User;
 import by.it.milosh.repository.PhoneNumberRepository;
+import by.it.milosh.repository.ServiceRepository;
 import by.it.milosh.repository.TariffRepository;
 import by.it.milosh.repository.UserRepository;
 import by.it.milosh.service.service.UserService;
@@ -20,6 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private TariffRepository tariffRepository;
+
+    @Autowired
+    private ServiceRepository serviceRepository;
 
     @Autowired
     private PhoneNumberRepository phoneNumberRepository;
@@ -64,4 +68,29 @@ public class UserServiceImpl implements UserService {
     public Long numberOfUsers() {
         return userRepository.numberOfUsers();
     }
+
+    @Override
+    public void addServiceToUser(Long user_id, Long service_id) {
+        User user = userRepository.findOne(user_id);
+        by.it.milosh.model.Service service = serviceRepository.findOne(service_id);
+        user.getServices().add(service);
+        userRepository.save(user);
+    }
+
+    @Override
+    public List<by.it.milosh.model.Service> getServicesOfUser(Long user_id) {
+        User user = userRepository.findOne(user_id);
+        List<by.it.milosh.model.Service> services = user.getServices();
+        return services;
+    }
+
+    @Override
+    public List<by.it.milosh.model.Service> getServiceNonUser(Long user_id) {
+        User user = userRepository.findOne(user_id);
+        List<by.it.milosh.model.Service> servicesOfUser = user.getServices();
+        List<by.it.milosh.model.Service> servicesNonUser = serviceRepository.findAll();
+        servicesNonUser.removeAll(servicesOfUser);
+        return servicesNonUser;
+    }
+
 }

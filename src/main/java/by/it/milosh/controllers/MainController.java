@@ -94,14 +94,14 @@ public class MainController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "tariffs", method = RequestMethod.GET)
+    @RequestMapping(value = "/tariffs", method = RequestMethod.GET)
     public String tariffs(Model model) {
         List<Tariff> tariffs = tariffService.findAll();
         model.addAttribute("tariffs", tariffs);
         return "main/tariffs";
     }
 
-    @RequestMapping(value = "services", method = RequestMethod.GET)
+    @RequestMapping(value = "/services", method = RequestMethod.GET)
     public String services(Model model) {
         List<Service> services = new ArrayList<Service>();
         services = serviceService.findAll();
@@ -109,7 +109,7 @@ public class MainController {
         return "main/services";
     }
 
-    @RequestMapping(value = "internet", method = RequestMethod.GET)
+    @RequestMapping(value = "/internet", method = RequestMethod.GET)
     public String internet(Model model) {
         return "main/internet";
     }

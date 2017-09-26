@@ -16,6 +16,10 @@
 <div class="container">
 
         <div th:if="${user.tariff == null}">
+            <div>
+                In order to use the services of our company, you must make a connection.
+            </div>
+            <br/>
             <a th:href="@{/user/connect}"><button type="submit" class="btn btn-default">Connect</button></a>
         </div>
 
@@ -25,6 +29,11 @@
             <div th:if="${numberOfTariffs > 1}">
                 <a th:href="@{/user/changeTariff}"><button type="submit" class="btn btn-default">Change tariff</button></a>
             </div>
+
+            <br/>
+
+            <a th:href="@{/user/services}"><button type="submit" class="btn btn-default">List of services</button></a>
+
         </div>
 
     <div th:replace="fragments/footer :: footer">

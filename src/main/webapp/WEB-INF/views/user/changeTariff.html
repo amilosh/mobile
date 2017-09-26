@@ -22,19 +22,23 @@
                 <thead>
                 <tr>
                     <th>Tariff</th>
+                    <th>Cost per month</th>
+                    <th>Cost per minute</th>
                 </tr>
                 </thead>
                 <tbody>
-                <th:block th:each="tar : ${tariffs}">
-                    <div th:if="${tar.tariffName} != ${user.tariff.tariffName}">
+                <th:block th:each="tariff : ${tariffs}">
+                    <div th:if="${tariff.tariffName} != ${user.tariff.tariffName}">
                         <tr>
                             <td>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" th:field="*{tariff_id}" th:value="${tar.tariff_id}" th:text="${tar.tariffName}"/>
+                                        <input type="radio" th:field="*{tariff_id}" th:value="${tariff.tariff_id}" th:text="${tariff.tariffName}"/>
                                     </label>
                                 </div>
                             </td>
+                            <td th:text="${tariff.costPerMonth}">...</td>
+                            <td th:text="${tariff.costPerMinute}">...</td>
                         </tr>
                     </div>
                 </th:block>

@@ -97,4 +97,12 @@ public class User {
     public void setTariff(Tariff tariff) {
         this.tariff = tariff;
     }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
+    }
 }
