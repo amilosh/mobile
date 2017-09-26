@@ -29,12 +29,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <th:block th:each="tariff : ${tariffs}">
+                    <th:block th:each="tariffFromList : ${tariffs}">
                         <tr>
                             <td>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" th:field="*{tariff_id}" th:value="${tariff.tariff_id}" th:text="${tariff.tariffName}"/>
+                                        <input type="radio" th:field="*{tariff_id}" th:value="${tariffFromList.tariff_id}" th:text="${tariffFromList.tariffName}"/>
+                                        <input type="hidden" th:field="*{costPerMonth}" th:value="${tariffFromList.costPerMonth}">
                                     </label>
                                 </div>
                             </td>

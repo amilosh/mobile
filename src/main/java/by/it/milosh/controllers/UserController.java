@@ -52,6 +52,7 @@ public class UserController {
         return "user/connect";
     }
 
+    /* было
     @RequestMapping(value = "/connect", params = {"connect"}, method = RequestMethod.POST)
     public String connect(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br, Principal principal) {
         User user = userService.findUserByUsername(principal.getName());
@@ -60,6 +61,38 @@ public class UserController {
         List<PhoneNumber> phoneNumbers = phoneNumberService.findAllUnusedNumbers();
         PhoneNumber pn = phoneNumbers.get(0);
         userService.addNumberToUser(user, pn);
+        return "redirect:/user";
+    }
+    */
+
+    @RequestMapping(value = "/connect", params = {"connect"}, method = RequestMethod.POST)
+    public String connect(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br, Principal principal, Model model) {
+        User user = userService.findUserByUsername(principal.getName());
+        Long tar_id = tariff.getTariff_id();
+        userService.addTariffToUser(user, tar_id);
+        Integer userAccount = user.getAccount();
+        Tariff checkTariff = tariffService.getById(tar_id);
+        Integer costPerMonth = checkTariff.getCostPerMonth();
+
+        Integer newAccount = userAccount - costPerMonth;
+        user.setAccount(newAccount);
+        userService.add(user);
+
+        List<PhoneNumber> phoneNumbers = phoneNumberService.findAllUnusedNumbers();
+        PhoneNumber pn = phoneNumbers.get(0);
+        userService.addNumberToUser(user, pn);
+
+        model.addAttribute("tariff", checkTariff);
+        model.addAttribute("userWrapper", new UserWrapper());
+        return "user/connectAdvancePayment";
+    }
+
+    @RequestMapping(value = "/connectAdvancePayment", method = RequestMethod.POST)
+    public String connectAdvancePayment(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, Principal principal) {
+        User user = userService.findUserByUsername(principal.getName());
+        Integer newAccount = user.getAccount() + userWrapper.getAccount();
+        user.setAccount(newAccount);
+        userService.add(user);
         return "redirect:/user";
     }
 
