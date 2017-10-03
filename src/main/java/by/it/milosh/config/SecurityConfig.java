@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -19,6 +22,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AuthenticationService authService;
+
+
+//    @Bean
+//    public TokenBasedRememberMeServices rememberMeServices() {
+//        return new TokenBasedRememberMeServices("remember-me-key", authService);
+//    }
+
+
 
     /*
     @Bean
@@ -32,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/setup", "/addUser", "/registration", "/main/**", "/resources/**").permitAll()
+                    .antMatchers("/", "/setup", "/main/**", "/resources/**").permitAll()
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/user/**").hasRole("USER")
                     .anyRequest().authenticated()
@@ -45,6 +56,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutUrl("/logout").permitAll()
                     .logoutSuccessUrl("/").permitAll()
                     .and()
+//                .rememberMe()
+//                    .rememberMeServices(rememberMeServices())
+//                    .key("remember-me-key")
+//                    .rememberMeParameter("remember-me-param")
+//                    //.rememberMeCookieName("my-remember-me")
+//                    .tokenValiditySeconds(86400)
+//                    .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 
     }

@@ -59,11 +59,6 @@ public class MainController {
         return "main/user";
     }
 
-    @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public String error403() {
-        return "403";
-    }
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(@RequestParam(value = "error", required = false) String error,
                         @RequestParam(value = "logout", required = false) String logout,
