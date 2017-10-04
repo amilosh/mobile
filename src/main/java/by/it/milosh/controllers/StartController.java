@@ -8,6 +8,7 @@ import by.it.milosh.service.service.CheckInitAdminService;
 import by.it.milosh.service.service.RoleService;
 import by.it.milosh.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +33,9 @@ public class StartController {
     @Autowired
     CheckInitAdminService checkInitAdminService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String main() {
         return "main/main";
@@ -50,7 +54,7 @@ public class StartController {
         }
         Role role = roleService.getById(1L);
         user.getRoles().add(role);
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setAccount(0);
         userService.add(user);
         checkInitAdminService.add(new CheckInitAdmin(true));
