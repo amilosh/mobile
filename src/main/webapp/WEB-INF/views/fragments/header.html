@@ -15,13 +15,20 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li th:classappend="${#request.requestURI == '/main/tariffs'}?active"><a th:href="@{/main/tariffs}">Tariffs</a></li>
-                    <li th:classappend="${#request.requestURI == '/main/services'}?active"><a th:href="@{/main/services}">Services</a></li>
-                    <li th:classappend="${#request.requestURI == '/main/internet'}?active"><a th:href="@{/main/internet}">Internet</a></li>
+                    <li th:classappend="${#request.requestURI == '/main/tariffs'}?active"><a th:href="@{/main/tariffs}" th:text="#{header.tariffs}">Tariffs</a></li>
+                    <li th:classappend="${#request.requestURI == '/main/services'}?active"><a th:href="@{/main/services}" th:text="#{header.services}">Services</a></li>
+                    <li th:classappend="${#request.requestURI == '/main/internet'}?active"><a th:href="@{/main/internet}" th:text="#{header.internet}">Internet</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span th:text="#{header.language}">Language</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/?lang=en_US}" th:text="#{header.english}">Английский</a></li>
+                            <li><a th:href="@{/?lang=ru_RU}" th:text="#{header.russian}">Русский</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" th:if="${#authorization.expression('!isAuthenticated()')}">
-                        <li><a th:href="@{/main/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        <li><a th:href="@{/main/registration}"><span class="glyphicon glyphicon-log-in"></span> Registration</a></li>
+                        <li><a th:href="@{/main/login}"><span class="glyphicon glyphicon-log-in"></span><span th:text="#{header.login}"> Login</span></a></li>
+                        <li><a th:href="@{/main/registration}"><span class="glyphicon glyphicon-log-in"></span><span th:text="#{header.registration}"> Registration</span></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" th:if="${#authorization.expression('isAuthenticated()')}">
                     <li><a th:href="@{/main/personal}"><span sec:authentication="name">Authorized</span></a></li>

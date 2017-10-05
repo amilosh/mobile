@@ -27,28 +27,28 @@
 
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-3">Welcome!</h1>
-        <p>Welcome to the start page of the telecommunications company "Mobile". We provide cellular services in GSM and LTE standards, wireline telephone services, broadband Internet access, mobile television, cable television, satellite television, digital television and related services, in particular content sales services.</p>
-        <p><a href="#" class="btn btn-primary btn-lg">Reed more &raquo;</a></p>
+        <h1 class="display-3" th:text="#{main.welcome}">Welcome!</h1>
+        <p th:text="#{main.welcome.message}">Welcome to the start page of the telecommunications company "Mobile". We provide cellular services in GSM and LTE standards, wireline telephone services, broadband Internet access, mobile television, cable television, satellite television, digital television and related services, in particular content sales services.</p>
+        <p><a href="#" class="btn btn-primary btn-lg" th:text="#{main.readMore}">Read more &raquo;</a></p>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <h2>Tariffs</h2>
-            <p>Read the tariffs that our company provides.</p>
-            <p><a th:href="@{/main/tariffs}" class="btn btn-default">Reed more &raquo;</a></p>
+            <h2 th:text="#{header.tariffs}">Tariffs</h2>
+            <p th:text="#{main.tariffs.message}">Read the tariffs that our company provides.</p>
+            <p><a th:href="@{/main/tariffs}" class="btn btn-default" th:text="#{main.readMore}">Read more &raquo;</a></p>
         </div>
         <div class="col-md-4">
-            <h2>Services</h2>
-            <p>See the services that our company provides.</p>
-            <p><a th:href="@{/main/services}" class="btn btn-default">Reed more &raquo;</a></p>
+            <h2 th:text="#{header.services}">Services</h2>
+            <p th:text="#{main.services.message}">See the services that our company provides.</p>
+            <p><a th:href="@{/main/services}" class="btn btn-default" th:text="#{main.readMore}">Read more &raquo;</a></p>
         </div>
         <div class="col-md-4">
-            <h2>Mobile Internet</h2>
-            <p>We provide mobile internet traps. The coverage area is 85% of the country's area, and covers 95% of the population. The network supports the third generation (3G) data transfer.</p>
-            <p><a th:href="@{/main/internet}" class="btn btn-default">Reed more &raquo;</a></p>
+            <h2 th:text="#{header.internet}">Mobile Internet</h2>
+            <p th:text="#{main.mobileInternet.message}">We provide mobile internet traps. The coverage area is 85% of the country's area, and covers 95% of the population. The network supports the third generation (3G) data transfer.</p>
+            <p><a th:href="@{/main/internet}" class="btn btn-default" th:text="#{main.readMore}">Read more &raquo;</a></p>
         </div>
     </div>
 
