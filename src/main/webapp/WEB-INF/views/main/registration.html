@@ -35,17 +35,21 @@
                     <h3 class="panel-title">REGISTRATION</h3>
                 </div>
                 <div class="panel-body">
+
+
                     <form class="form-horizontal" name="form" action="#" th:action="@{/main/registration}" method="post" th:object="${user}">
                         <div class="form-group">
                             <label for="username" class="col-sm-2 control-label">Username</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{username}"/>
+                                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="display: inline-block; margin-top: 5px; color: red">Name Error</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="password" class="col-sm-2 control-label">Password</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="password" placeholder="Password" th:field="*{password}"/>
+                                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="display: inline-block; margin-top: 5px; color: red">Name Error</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -54,6 +58,8 @@
                             </div>
                         </div>
                     </form>
+
+
                 </div>
             </div>
         </div>
