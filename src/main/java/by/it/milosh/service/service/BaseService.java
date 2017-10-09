@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface BaseService<T> {
 
-    void add(T t);
+    void save(T t);
 
     T getById(Long id);
 

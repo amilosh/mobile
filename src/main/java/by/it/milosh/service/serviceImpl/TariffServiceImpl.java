@@ -16,7 +16,7 @@ public class TariffServiceImpl implements TariffService {
     private TariffRepository tariffRepository;
 
     @Override
-    public void add(Tariff tariff) {
+    public void save(Tariff tariff) {
         tariffRepository.save(tariff);
     }
 

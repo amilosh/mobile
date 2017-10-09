@@ -15,7 +15,7 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     private PhoneNumberRepository phoneNumberRepository;
 
     @Override
-    public void add(PhoneNumber phoneNumber) {
+    public void save(PhoneNumber phoneNumber) {
         phoneNumberRepository.save(phoneNumber);
     }
 

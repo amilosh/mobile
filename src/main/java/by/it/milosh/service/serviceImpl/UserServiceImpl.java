@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     private PhoneNumberRepository phoneNumberRepository;
 
     @Override
-    public void add(User user) {
+    public void save(User user) {
         userRepository.save(user);
     }
 

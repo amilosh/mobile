@@ -1,6 +1,7 @@
 package by.it.milosh.service.serviceImpl;
 
 import by.it.milosh.model.Role;
+import by.it.milosh.model.RoleEnum;
 import by.it.milosh.repository.RoleRepository;
 import by.it.milosh.service.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class RoleServiceImpl implements RoleService {
     private RoleRepository roleRepository;
 
     @Override
-    public void add(Role role) {
+    public void save(Role role) {
         roleRepository.save(role);
     }
 
@@ -27,5 +28,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Role> findAll() {
         return roleRepository.findAll();
+    }
+
+    @Override
+    public Role getRoleByRoleName(String roleName) {
+        return roleRepository.getRoleByRoleName(roleName);
     }
 }

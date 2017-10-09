@@ -14,7 +14,7 @@ public class ServiceServiceImpl implements ServiceService {
     private ServiceRepository serviceRepository;
 
     @Override
-    public void add(by.it.milosh.model.Service service) {
+    public void save(by.it.milosh.model.Service service) {
         serviceRepository.save(service);
     }
 

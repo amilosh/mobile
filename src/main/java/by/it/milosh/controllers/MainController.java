@@ -4,10 +4,7 @@ import by.it.milosh.config.SecurityService;
 import by.it.milosh.model.*;
 import by.it.milosh.service.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -83,7 +78,7 @@ public class MainController {
         user.getRoles().add(role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setAccount(0);
-        userService.add(user);
+        userService.save(user);
         securityService.autoLogin(user.getUsername(), user.getPassword());
 
         return "redirect:/";

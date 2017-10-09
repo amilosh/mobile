@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -76,7 +75,7 @@ public class UserController {
 
         Integer newAccount = userAccount - costPerMonth;
         user.setAccount(newAccount);
-        userService.add(user);
+        userService.save(user);
 
         List<PhoneNumber> phoneNumbers = phoneNumberService.findAllUnusedNumbers();
         PhoneNumber pn = phoneNumbers.get(0);
@@ -92,7 +91,7 @@ public class UserController {
         User user = userService.findUserByUsername(principal.getName());
         Integer newAccount = user.getAccount() + userWrapper.getAccount();
         user.setAccount(newAccount);
-        userService.add(user);
+        userService.save(user);
         return "redirect:/user";
     }
 
@@ -162,7 +161,7 @@ public class UserController {
         User user = userService.findUserByUsername(principal.getName());
         Integer newAccount = user.getAccount() + userWrapper.getAccount();
         user.setAccount(newAccount);
-        userService.add(user);
+        userService.save(user);
         return "redirect:/user";
     }
 

@@ -13,12 +13,14 @@ public class RolesInitialization {
     @Autowired
     private RoleService roleService;
 
+    /*
     @PostConstruct
     public void init() {
         if (roleService.findAll().isEmpty()) {
-            roleService.add(new Role("ROLE_ADMIN"));
-            roleService.add(new Role("ROLE_USER"));
+            roleService.save(new Role("ROLE_ADMIN"));
+            roleService.save(new Role("ROLE_USER"));
         }
     }
+    */
 
 }

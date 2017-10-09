@@ -16,7 +16,7 @@ public class CheckInitAdminServiceImpl implements CheckInitAdminService {
     private CheckInitAdminRepository checkInitAdminRepository;
 
     @Override
-    public void add(CheckInitAdmin checkInitAdmin) {
+    public void save(CheckInitAdmin checkInitAdmin) {
         checkInitAdminRepository.save(checkInitAdmin);
     }
 

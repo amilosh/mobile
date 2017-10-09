@@ -56,7 +56,7 @@ public class AdminController {
             return "/admin/numbers";
         }
         phoneNumber.setUsed(false);
-        phoneNumberService.add(phoneNumber);
+        phoneNumberService.save(phoneNumber);
         return "redirect:/admin/numbers";
     }
 
@@ -71,7 +71,7 @@ public class AdminController {
 
     @RequestMapping(value = "/addTariff", params = {"save"}, method = RequestMethod.POST)
     public String addTariff(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br) {
-        tariffService.add(tariff);
+        tariffService.save(tariff);
         return "redirect:/admin/tariffs";
     }
 
@@ -107,7 +107,7 @@ public class AdminController {
 
     @RequestMapping(value = "/addService", params = {"save"}, method = RequestMethod.POST)
     public String addService(@Valid @ModelAttribute("service") Service service, BindingResult br) {
-        serviceService.add(service);
+        serviceService.save(service);
         return "redirect:/admin/services";
     }
 
