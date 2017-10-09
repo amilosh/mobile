@@ -8,8 +8,8 @@ public class PhoneNumber {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "phoneNumber_id")
-    private Long phoneNumber_id;
+    @Column(name = "phoneNumberId")
+    private Long phoneNumberId;
 
     @Column(name = "number", unique = true, nullable = false)
     private Integer number;
@@ -29,12 +29,12 @@ public class PhoneNumber {
         this.used = used;
     }
 
-    public Long getPhoneNumber_id() {
-        return phoneNumber_id;
+    public Long getPhoneNumberId() {
+        return phoneNumberId;
     }
 
-    public void setPhoneNumber_id(Long phoneNumber_id) {
-        this.phoneNumber_id = phoneNumber_id;
+    public void setPhoneNumberId(Long phoneNumberId) {
+        this.phoneNumberId = phoneNumberId;
     }
 
     public Integer getNumber() {

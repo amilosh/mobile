@@ -55,7 +55,7 @@ public class UserController {
     @RequestMapping(value = "/connect", params = {"connect"}, method = RequestMethod.POST)
     public String connect(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br, Principal principal) {
         User user = userService.findUserByUsername(principal.getName());
-        Long tar_id = tariff.getTariff_id();
+        Long tar_id = tariff.getTariffId();
         userService.addTariffToUser(user, tar_id);
         List<PhoneNumber> phoneNumbers = phoneNumberService.findAllUnusedNumbers();
         PhoneNumber pn = phoneNumbers.get(0);
@@ -67,10 +67,10 @@ public class UserController {
     @RequestMapping(value = "/connect", params = {"connect"}, method = RequestMethod.POST)
     public String connect(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br, Principal principal, Model model) {
         User user = userService.findUserByUsername(principal.getName());
-        Long tar_id = tariff.getTariff_id();
-        userService.addTariffToUser(user, tar_id);
+        Long tariffId = tariff.getTariffId();
+        userService.addTariffToUser(user, tariffId);
         Integer userAccount = user.getAccount();
-        Tariff checkTariff = tariffService.getById(tar_id);
+        Tariff checkTariff = tariffService.getById(tariffId);
         Integer costPerMonth = checkTariff.getCostPerMonth();
 
         Integer newAccount = userAccount - costPerMonth;
@@ -110,23 +110,23 @@ public class UserController {
     @RequestMapping(value = "/changeTariff", params = {"changeTariff"}, method = RequestMethod.POST)
     public String changeTariff(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br, Principal principal) {
         User user = userService.findUserByUsername(principal.getName());
-        Long tar_id = tariff.getTariff_id();
-        userService.addTariffToUser(user, tar_id);
+        Long tariffId = tariff.getTariffId();
+        userService.addTariffToUser(user, tariffId);
         return "redirect:/user";
     }
 
     @RequestMapping(value = "/emptyTariff", params = {"changeTariff"}, method = RequestMethod.POST)
     public String emptyTariff(@Valid @ModelAttribute("emptyTariff") Tariff tariff, BindingResult br, Principal principal) {
         User user = userService.findUserByUsername(principal.getName());
-        Long tar_id = tariff.getTariff_id();
-        userService.addTariffToUser(user, tar_id);
+        Long tariffId = tariff.getTariffId();
+        userService.addTariffToUser(user, tariffId);
         return "redirect:/user";
     }
 
     @RequestMapping(value = "/services", method = RequestMethod.GET)
     public String services(Model model, Principal principal) {
-        Long user_id = userService.findUserByUsername(principal.getName()).getUser_id();
-        List<Service> servicesOfUser = userService.getServicesOfUser(user_id);
+        Long userId = userService.findUserByUsername(principal.getName()).getUserId();
+        List<Service> servicesOfUser = userService.getServicesOfUser(userId);
         model.addAttribute("servicesOfUser", servicesOfUser);
         return "user/services";
     }
@@ -134,7 +134,7 @@ public class UserController {
     @RequestMapping(value = "/connectServices", method = RequestMethod.GET)
     public String connectServices(Model model, Principal principal) {
         User user = userService.findUserByUsername(principal.getName());
-        List<Service> servicesNonUser = userService.getServiceNonUser(user.getUser_id());
+        List<Service> servicesNonUser = userService.getServiceNonUser(user.getUserId());
         model.addAttribute("servicesNonUser", servicesNonUser);
         model.addAttribute("userWrapper", new UserWrapper());
         return "user/connectServices";
@@ -145,7 +145,7 @@ public class UserController {
         User user = userService.findUserByUsername(principal.getName());
         List<Long> serviceIds = userWrapper.getServiceId();
         for (Long id : serviceIds) {
-            userService.addServiceToUser(user.getUser_id(), id);
+            userService.addServiceToUser(user.getUserId(), id);
         }
         return "redirect:/user";
     }

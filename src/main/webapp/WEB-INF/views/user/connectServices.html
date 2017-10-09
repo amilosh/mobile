@@ -34,7 +34,7 @@
             <th:block th:each="service : ${servicesNonUser}">
                 <tr>
                     <td>
-                        <input type="checkbox" th:field="*{serviceId}" th:value="${service.service_id}"/>
+                        <input type="checkbox" th:field="*{serviceId}" th:value="${service.serviceId}"/>
                     </td>
                     <td th:text="${service.serviceName}">...</td>
                     <td th:text="${service.description}">...</td>

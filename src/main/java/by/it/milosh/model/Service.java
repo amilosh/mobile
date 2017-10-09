@@ -10,8 +10,8 @@ public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "service_id")
-    private Long service_id;
+    @Column(name = "serviceId")
+    private Long serviceId;
 
     @Column(name = "service_name", unique = true, nullable = false)
     private String serviceName;
@@ -38,12 +38,12 @@ public class Service {
         this.costPerMonth = costPerMonth;
     }
 
-    public Long getService_id() {
-        return service_id;
+    public Long getServiceId() {
+        return serviceId;
     }
 
-    public void setService_id(Long service_id) {
-        this.service_id = service_id;
+    public void setServiceId(Long serviceId) {
+        this.serviceId = serviceId;
     }
 
     public String getServiceName() {

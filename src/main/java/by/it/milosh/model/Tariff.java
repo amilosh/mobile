@@ -9,8 +9,8 @@ public class Tariff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tariff_id")
-    private Long tariff_id;
+    @Column(name = "tariffId")
+    private Long tariffId;
 
     @Column(name = "tariffName", unique = true, nullable = false)
     private String tariffName;
@@ -33,12 +33,12 @@ public class Tariff {
         this.costPerMinute = costPerMinute;
     }
 
-    public Long getTariff_id() {
-        return tariff_id;
+    public Long getTariffId() {
+        return tariffId;
     }
 
-    public void setTariff_id(Long tariff_id) {
-        this.tariff_id = tariff_id;
+    public void setTariffId(Long tariffId) {
+        this.tariffId = tariffId;
     }
 
     public String getTariffName() {

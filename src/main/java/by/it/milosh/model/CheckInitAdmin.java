@@ -8,8 +8,8 @@ public class CheckInitAdmin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "checkInitAdmin_id")
-    private Long checkInitAdmin_id;
+    @Column(name = "checkInitAdminId")
+    private Long checkInitAdminId;
 
     @Column(name = "checkInit")
     private boolean checkInit;
@@ -21,12 +21,12 @@ public class CheckInitAdmin {
         this.checkInit = checkInit;
     }
 
-    public Long getCheckInitAdmin_id() {
-        return checkInitAdmin_id;
+    public Long getCheckInitAdminId() {
+        return checkInitAdminId;
     }
 
-    public void setCheckInitAdmin_id(Long checkInitAdmin_id) {
-        this.checkInitAdmin_id = checkInitAdmin_id;
+    public void setCheckInitAdminId(Long checkInitAdminId) {
+        this.checkInitAdminId = checkInitAdminId;
     }
 
     public boolean isCheckInit() {

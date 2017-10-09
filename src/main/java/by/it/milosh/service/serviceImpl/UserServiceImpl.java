@@ -49,8 +49,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addTariffToUser(User user, Long tariff_id) {
-        Tariff tariff = tariffRepository.findOne(tariff_id);
+    public void addTariffToUser(User user, Long tariffId) {
+        Tariff tariff = tariffRepository.findOne(tariffId);
         user.setTariff(tariff);
         userRepository.save(user);
     }
@@ -70,23 +70,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addServiceToUser(Long user_id, Long service_id) {
-        User user = userRepository.findOne(user_id);
-        by.it.milosh.model.Service service = serviceRepository.findOne(service_id);
+    public void addServiceToUser(Long userId, Long serviceId) {
+        User user = userRepository.findOne(userId);
+        by.it.milosh.model.Service service = serviceRepository.findOne(serviceId);
         user.getServices().add(service);
         userRepository.save(user);
     }
 
     @Override
-    public List<by.it.milosh.model.Service> getServicesOfUser(Long user_id) {
-        User user = userRepository.findOne(user_id);
+    public List<by.it.milosh.model.Service> getServicesOfUser(Long userId) {
+        User user = userRepository.findOne(userId);
         List<by.it.milosh.model.Service> services = user.getServices();
         return services;
     }
 
     @Override
-    public List<by.it.milosh.model.Service> getServiceNonUser(Long user_id) {
-        User user = userRepository.findOne(user_id);
+    public List<by.it.milosh.model.Service> getServiceNonUser(Long userId) {
+        User user = userRepository.findOne(userId);
         List<by.it.milosh.model.Service> servicesOfUser = user.getServices();
         List<by.it.milosh.model.Service> servicesNonUser = serviceRepository.findAll();
         servicesNonUser.removeAll(servicesOfUser);

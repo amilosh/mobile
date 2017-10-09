@@ -108,8 +108,8 @@ public class MainController {
     public String personal(Principal principal) {
         String name = principal.getName();
         User user = userService.findUserByUsername(name);
-        Long user_id = user.getUser_id();
-        if(user_id == 1L) {
+        Long userId = user.getUserId();
+        if(userId == 1L) {
             return "redirect:/admin";
         } else {
             return "redirect:/user";

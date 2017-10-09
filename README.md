@@ -11,7 +11,7 @@
 
         spring.datasource.username=root
         spring.datasource.password=12345
-        
+
 5. Open command line.
 6. Go to the folder with project: cd %path%\mobile-master\mobile-master (in command line)
 #### First way

@@ -30,7 +30,7 @@
         <tbody>
         <th:block th:each="us : ${users}">
             <tr>
-                <td th:text="${us.user_id}">...</td>
+                <td th:text="${us.userId}">...</td>
                 <td>
                     <a th:href="@{/admin/userInfo/} + ${us.username}" th:text="${us.username}" th:target="_blank">...</a>
                 </td>
