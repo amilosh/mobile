@@ -3,7 +3,6 @@ package by.it.milosh.model;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +16,11 @@ public class User {
     @Column(name = "user_id")
     private Long user_id;
 
-    @Size(min=4, max=16, message = "Username must be between 4 and 16.")
+    //@Size(min=4, max=16, message = "Username must be between 4 and 16.")
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
-    @Size(min=4, max=16, message = "Password must be between 4 and 16.")
+    //@Size(min=4, max=16, message = "Password must be between 4 and 16.")
     @Column(name = "password", nullable = false)
     private String password;
 
