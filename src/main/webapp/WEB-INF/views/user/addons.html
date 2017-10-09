@@ -15,11 +15,11 @@
 <!-- Body -->
 <div class="container">
 
-    <div th:if="${servicesOfUser.isEmpty()}">
+    <div th:if="${addonsOfUser.isEmpty()}">
         You have not connected any services yet.
     </div>
     <br/>
-    <div  th:if="${!servicesOfUser.isEmpty()}">
+    <div  th:if="${!addonsOfUser.isEmpty()}">
         <div>
             Services to which you are connected.
         </div>
@@ -34,12 +34,12 @@
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="service : ${servicesOfUser}">
+            <th:block th:each="addon : ${addonsOfUser}">
                 <tr>
-                    <td th:text="${service.serviceName}">...</td>
-                    <td th:text="${service.description}">...</td>
-                    <td th:text="${service.connectCost}">...</td>
-                    <td th:text="${service.costPerMonth}">...</td>
+                    <td th:text="${addon.addonName}">...</td>
+                    <td th:text="${addon.description}">...</td>
+                    <td th:text="${addon.connectCost}">...</td>
+                    <td th:text="${addon.costPerMonth}">...</td>
                 </tr>
             </th:block>
             </tbody>
@@ -47,7 +47,7 @@
     </div>
 
 
-    <a th:href="@{/user/connectServices}"><button type="submit" class="btn btn-default">Connect new services</button></a>
+    <a th:href="@{/user/connectAddons}"><button type="submit" class="btn btn-default">Connect new services</button></a>
 
     <div th:replace="fragments/footer :: footer">
     </div>

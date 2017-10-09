@@ -37,8 +37,8 @@ public class User {
     @ManyToMany()
     @JoinTable(name = "user_services",
             joinColumns = {@JoinColumn(name = "userId")},
-            inverseJoinColumns = {@JoinColumn(name = "service_id")})
-    private List<Service> services = new ArrayList<Service>();
+            inverseJoinColumns = {@JoinColumn(name = "addonId")})
+    private List<Addon> addons = new ArrayList<Addon>();
 
     @Column(name = "account", nullable = false)
     private Integer account;
@@ -103,12 +103,12 @@ public class User {
         this.tariff = tariff;
     }
 
-    public List<Service> getServices() {
-        return services;
+    public List<Addon> getAddons() {
+        return addons;
     }
 
-    public void setServices(List<Service> services) {
-        this.services = services;
+    public void setAddons(List<Addon> addons) {
+        this.addons = addons;
     }
 
     public Integer getAccount() {

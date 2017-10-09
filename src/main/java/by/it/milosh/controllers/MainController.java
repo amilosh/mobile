@@ -32,7 +32,7 @@ public class MainController {
     private TariffService tariffService;
 
     @Autowired
-    private ServiceService serviceService;
+    private AddonService addonService;
 
     @Autowired
     private SecurityService securityService;
@@ -93,9 +93,9 @@ public class MainController {
 
     @RequestMapping(value = "/services", method = RequestMethod.GET)
     public String services(Model model) {
-        List<Service> services = new ArrayList<Service>();
-        services = serviceService.findAll();
-        model.addAttribute("services", services);
+        List<Addon> addons = new ArrayList<Addon>();
+        addons = addonService.findAll();
+        model.addAttribute("services", addons);
         return "main/services";
     }
 

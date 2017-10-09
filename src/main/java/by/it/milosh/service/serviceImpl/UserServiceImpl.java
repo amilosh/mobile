@@ -1,10 +1,11 @@
 package by.it.milosh.service.serviceImpl;
 
+import by.it.milosh.model.Addon;
 import by.it.milosh.model.PhoneNumber;
 import by.it.milosh.model.Tariff;
 import by.it.milosh.model.User;
 import by.it.milosh.repository.PhoneNumberRepository;
-import by.it.milosh.repository.ServiceRepository;
+import by.it.milosh.repository.AddonRepository;
 import by.it.milosh.repository.TariffRepository;
 import by.it.milosh.repository.UserRepository;
 import by.it.milosh.service.service.UserService;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
     private TariffRepository tariffRepository;
 
     @Autowired
-    private ServiceRepository serviceRepository;
+    private AddonRepository addonRepository;
 
     @Autowired
     private PhoneNumberRepository phoneNumberRepository;
@@ -70,27 +71,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addServiceToUser(Long userId, Long serviceId) {
+    public void addAddonToUser(Long userId, Long addonId) {
         User user = userRepository.findOne(userId);
-        by.it.milosh.model.Service service = serviceRepository.findOne(serviceId);
-        user.getServices().add(service);
+        Addon addon = addonRepository.findOne(addonId);
+        user.getAddons().add(addon);
         userRepository.save(user);
     }
 
     @Override
-    public List<by.it.milosh.model.Service> getServicesOfUser(Long userId) {
+    public List<Addon> getAddonsOfUser(Long userId) {
         User user = userRepository.findOne(userId);
-        List<by.it.milosh.model.Service> services = user.getServices();
-        return services;
+        List<Addon> addons = user.getAddons();
+        return addons;
     }
 
     @Override
-    public List<by.it.milosh.model.Service> getServiceNonUser(Long userId) {
+    public List<Addon> getAddonsNonUser(Long userId) {
         User user = userRepository.findOne(userId);
-        List<by.it.milosh.model.Service> servicesOfUser = user.getServices();
-        List<by.it.milosh.model.Service> servicesNonUser = serviceRepository.findAll();
-        servicesNonUser.removeAll(servicesOfUser);
-        return servicesNonUser;
+        List<Addon> addonsOfUser = user.getAddons();
+        List<Addon> addonsNonUser = addonRepository.findAll();
+        addonsNonUser.removeAll(addonsOfUser);
+        return addonsNonUser;
     }
 
 }

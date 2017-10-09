@@ -6,15 +6,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "service")
-public class Service {
+public class Addon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "serviceId")
-    private Long serviceId;
+    @Column(name = "addonId")
+    private Long addonId;
 
     @Column(name = "service_name", unique = true, nullable = false)
-    private String serviceName;
+    private String addonName;
 
     @Column(name = "description", nullable = false)
     private String description;
@@ -25,33 +25,33 @@ public class Service {
     @Column(name = "cost_per_month", nullable = false)
     private Integer costPerMonth;
 
-    @ManyToMany(mappedBy = "services")
+    @ManyToMany(mappedBy = "addons")
     private List<User> users = new ArrayList<User>();
 
-    public Service() {
+    public Addon() {
     }
 
-    public Service(String serviceName, String description, Integer connectCost, Integer costPerMonth) {
-        this.serviceName = serviceName;
+    public Addon(String addonName, String description, Integer connectCost, Integer costPerMonth) {
+        this.addonName = addonName;
         this.description = description;
         this.connectCost = connectCost;
         this.costPerMonth = costPerMonth;
     }
 
-    public Long getServiceId() {
-        return serviceId;
+    public Long getAddonId() {
+        return addonId;
     }
 
-    public void setServiceId(Long serviceId) {
-        this.serviceId = serviceId;
+    public void setAddonId(Long addonId) {
+        this.addonId = addonId;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public String getAddonName() {
+        return addonName;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public void setAddonName(String addonName) {
+        this.addonName = addonName;
     }
 
     public String getDescription() {

@@ -15,10 +15,10 @@
 <!-- Body -->
 <div class="container">
 
-    <div th:if="${servicesNonUser.isEmpty()}">
+    <div th:if="${addonsNonUser.isEmpty()}">
         You already have all the services connected.
     </div>
-    <form method="post" th:object="${userWrapper}" th:action="@{/user/connectServices}" th:if="${!servicesNonUser.isEmpty()}">
+    <form method="post" th:object="${userWrapper}" th:action="@{/user/connectAddons}" th:if="${!addonsNonUser.isEmpty()}">
         <div>
             Select services.
         </div>
@@ -31,15 +31,15 @@
                 <th>Connect cost</th>
                 <th>Cost per month</th>
             </tr>
-            <th:block th:each="service : ${servicesNonUser}">
+            <th:block th:each="addon : ${addonsNonUser}">
                 <tr>
                     <td>
-                        <input type="checkbox" th:field="*{serviceId}" th:value="${service.serviceId}"/>
+                        <input type="checkbox" th:field="*{addonId}" th:value="${addon.addonId}"/>
                     </td>
-                    <td th:text="${service.serviceName}">...</td>
-                    <td th:text="${service.description}">...</td>
-                    <td th:text="${service.connectCost}">...</td>
-                    <td th:text="${service.costPerMonth}">...</td>
+                    <td th:text="${addon.addonName}">...</td>
+                    <td th:text="${addon.description}">...</td>
+                    <td th:text="${addon.connectCost}">...</td>
+                    <td th:text="${addon.costPerMonth}">...</td>
                 </tr>
             </th:block>
         </table>

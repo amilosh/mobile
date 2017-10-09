@@ -2,7 +2,7 @@ package by.it.milosh.controllers;
 
 import by.it.milosh.model.*;
 import by.it.milosh.service.service.PhoneNumberService;
-import by.it.milosh.service.service.ServiceService;
+import by.it.milosh.service.service.AddonService;
 import by.it.milosh.service.service.TariffService;
 import by.it.milosh.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class AdminController {
     private UserService userService;
 
     @Autowired
-    private ServiceService serviceService;
+    private AddonService addonService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String admin(Model model) {
@@ -97,18 +97,18 @@ public class AdminController {
         return "admin/userInfo";
     }
 
-    @RequestMapping(value = "/services", method = RequestMethod.GET)
-    public String services(Model model) {
-        List<Service> services = serviceService.findAll();
-        model.addAttribute("services", services);
-        model.addAttribute("service", new Service());
-        return "admin/services";
+    @RequestMapping(value = "/addons", method = RequestMethod.GET)
+    public String addons(Model model) {
+        List<Addon> addons = addonService.findAll();
+        model.addAttribute("addons", addons);
+        model.addAttribute("addon", new Addon());
+        return "admin/addons";
     }
 
-    @RequestMapping(value = "/addService", params = {"save"}, method = RequestMethod.POST)
-    public String addService(@Valid @ModelAttribute("service") Service service, BindingResult br) {
-        serviceService.save(service);
-        return "redirect:/admin/services";
+    @RequestMapping(value = "/addAddon", params = {"save"}, method = RequestMethod.POST)
+    public String addAddon(@Valid @ModelAttribute("addon") Addon addon, BindingResult br) {
+        addonService.save(addon);
+        return "redirect:/admin/addons";
     }
 
 }

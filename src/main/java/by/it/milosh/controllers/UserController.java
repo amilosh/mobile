@@ -2,7 +2,7 @@ package by.it.milosh.controllers;
 
 import by.it.milosh.model.*;
 import by.it.milosh.service.service.PhoneNumberService;
-import by.it.milosh.service.service.ServiceService;
+import by.it.milosh.service.service.AddonService;
 import by.it.milosh.service.service.TariffService;
 import by.it.milosh.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class UserController {
     private TariffService tariffService;
 
     @Autowired
-    private ServiceService serviceService;
+    private AddonService addonService;
 
     @Autowired
     private PhoneNumberService phoneNumberService;
@@ -123,29 +123,29 @@ public class UserController {
         return "redirect:/user";
     }
 
-    @RequestMapping(value = "/services", method = RequestMethod.GET)
-    public String services(Model model, Principal principal) {
+    @RequestMapping(value = "/addons", method = RequestMethod.GET)
+    public String addons(Model model, Principal principal) {
         Long userId = userService.findUserByUsername(principal.getName()).getUserId();
-        List<Service> servicesOfUser = userService.getServicesOfUser(userId);
-        model.addAttribute("servicesOfUser", servicesOfUser);
-        return "user/services";
+        List<Addon> addonsOfUser = userService.getAddonsOfUser(userId);
+        model.addAttribute("addonsOfUser", addonsOfUser);
+        return "user/addons";
     }
 
-    @RequestMapping(value = "/connectServices", method = RequestMethod.GET)
-    public String connectServices(Model model, Principal principal) {
+    @RequestMapping(value = "/connectAddons", method = RequestMethod.GET)
+    public String connectAddons(Model model, Principal principal) {
         User user = userService.findUserByUsername(principal.getName());
-        List<Service> servicesNonUser = userService.getServiceNonUser(user.getUserId());
-        model.addAttribute("servicesNonUser", servicesNonUser);
+        List<Addon> addonsNonUser = userService.getAddonsNonUser(user.getUserId());
+        model.addAttribute("addonsNonUser", addonsNonUser);
         model.addAttribute("userWrapper", new UserWrapper());
-        return "user/connectServices";
+        return "user/connectAddons";
     }
 
-    @RequestMapping(value = "/connectServices", method = RequestMethod.POST)
-    public String connectServices(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, Principal principal) {
+    @RequestMapping(value = "/connectAddons", method = RequestMethod.POST)
+    public String connectAddons(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, Principal principal) {
         User user = userService.findUserByUsername(principal.getName());
-        List<Long> serviceIds = userWrapper.getServiceId();
-        for (Long id : serviceIds) {
-            userService.addServiceToUser(user.getUserId(), id);
+        List<Long> addonIds = userWrapper.getAddonId();
+        for (Long id : addonIds) {
+            userService.addAddonToUser(user.getUserId(), id);
         }
         return "redirect:/user";
     }

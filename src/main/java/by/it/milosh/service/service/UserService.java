@@ -1,7 +1,7 @@
 package by.it.milosh.service.service;
 
 import by.it.milosh.model.PhoneNumber;
-import by.it.milosh.model.Service;
+import by.it.milosh.model.Addon;
 import by.it.milosh.model.User;
 
 import java.util.List;
@@ -16,10 +16,10 @@ public interface UserService extends BaseService<User> {
 
     Long numberOfUsers();
 
-    void addServiceToUser(Long user_id, Long service_id);
+    void addAddonToUser(Long userId, Long addonId);
 
-    List<Service> getServicesOfUser(Long user_id);
+    List<Addon> getAddonsOfUser(Long userId);
 
-    List<Service> getServiceNonUser(Long user_id);
+    List<Addon> getAddonsNonUser(Long userId);
 
 }
