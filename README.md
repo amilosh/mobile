@@ -8,18 +8,18 @@
 2. Unzip archive to folder "mobile-master".
 3. Open file src/main/resources/application.properties.
 4. Change this code according to your settings:
-    > `spring.datasource.username=root`
-    > `spring.datasource.password=12345`
+    spring.datasource.username=root
+    spring.datasource.password=12345
 5. Open command line.
 6. Go to the folder with project: cd %path%\mobile-master\mobile-master (in command line)
 #### First way
-1. Run the command: gradlew build.
+1. Run the command: `gradlew build`.
 2. Open folder %mobile-master%\build\libs.
 3. Copy file "mobile.war" and put it into folder %tomcat_home%\webapps.
 4. In browser address bar type "localhost:8080/mobile/setup".
 5. Enter 'username' and 'password' to add administrator data to the database.
 #### Second way
-1. Run the command: gradlew bootRun.
+1. Run the command: `gradlew bootRun`.
 2. In browser address bar type "localhost:8080/setup".
 3. Enter 'username' and 'password' to add administrator data to the database.
 
