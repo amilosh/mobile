@@ -69,12 +69,12 @@ public class UserController {
         User user = userService.findUserByUsername(principal.getName());
         Long tariffId = tariff.getTariffId();
         userService.addTariffToUser(user, tariffId);
-        Integer userAccount = user.getAccount();
+        Integer userBalance = user.getBalance();
         Tariff checkTariff = tariffService.getById(tariffId);
         Integer costPerMonth = checkTariff.getCostPerMonth();
 
-        Integer newAccount = userAccount - costPerMonth;
-        user.setAccount(newAccount);
+        Integer newBalance = userBalance - costPerMonth;
+        user.setBalance(newBalance);
         userService.save(user);
 
         List<PhoneNumber> phoneNumbers = phoneNumberService.findAllUnusedNumbers();
@@ -89,8 +89,8 @@ public class UserController {
     @RequestMapping(value = "/connectAdvancePayment", method = RequestMethod.POST)
     public String connectAdvancePayment(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, Principal principal) {
         User user = userService.findUserByUsername(principal.getName());
-        Integer newAccount = user.getAccount() + userWrapper.getAccount();
-        user.setAccount(newAccount);
+        Integer newBalance = user.getBalance() + userWrapper.getBalance();
+        user.setBalance(newBalance);
         userService.save(user);
         return "redirect:/user";
     }
@@ -150,17 +150,17 @@ public class UserController {
         return "redirect:/user";
     }
 
-    @RequestMapping(value = "/topUpAccount", method = RequestMethod.GET)
-    public String topUpAccount(Model model) {
+    @RequestMapping(value = "/topUpBalance", method = RequestMethod.GET)
+    public String topUpBalance(Model model) {
         model.addAttribute("userWrapper", new UserWrapper());
-        return "user/topUpAccount";
+        return "user/topUpBalance";
     }
 
-    @RequestMapping(value = "/topUpAccount", method = RequestMethod.POST)
-    public String topUpAccount(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, Principal principal) {
+    @RequestMapping(value = "/topUpBalance", method = RequestMethod.POST)
+    public String topUpBalance(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, Principal principal) {
         User user = userService.findUserByUsername(principal.getName());
-        Integer newAccount = user.getAccount() + userWrapper.getAccount();
-        user.setAccount(newAccount);
+        Integer newBalance = user.getBalance() + userWrapper.getBalance();
+        user.setBalance(newBalance);
         userService.save(user);
         return "redirect:/user";
     }

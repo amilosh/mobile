@@ -6,7 +6,7 @@ public class UserWrapper {
 
     private List<Long> addonId;
 
-    private Integer account;
+    private Integer balance;
 
     public UserWrapper() {
     }
@@ -19,11 +19,11 @@ public class UserWrapper {
         this.addonId = addonId;
     }
 
-    public Integer getAccount() {
-        return account;
+    public Integer getBalance() {
+        return balance;
     }
 
-    public void setAccount(Integer account) {
-        this.account = account;
+    public void setBalance(Integer balance) {
+        this.balance = balance;
     }
 }

@@ -16,12 +16,12 @@
     <div class="row">
         <div class="col-md-12">
             <div>
-                In order to use the services you must advance the account. Minimum: <span th:text="${tariff.costPerMonth}">...</span>
+                In order to use the services you must advance the balance. Minimum: <span th:text="${tariff.costPerMonth}">...</span>
             </div>
             <br/>
             <form name="topUpAccount" th:action="@{/user/connectAdvancePayment}" method="post" th:object="${userWrapper}">
-                <input th:type="text" th:field="*{account}"><br/><br/>
-                <button type="submit" name="connect" class="btn btn-default">Advance account</button>
+                <input th:type="text" th:field="*{balance}"><br/><br/>
+                <button type="submit" name="connect" class="btn btn-default">Advance balance</button>
             </form>
         </div>
     </div>

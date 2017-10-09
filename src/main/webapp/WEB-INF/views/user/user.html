@@ -26,7 +26,7 @@
         <div th:if="${user.tariff != null}">
             Your number: <span th:text="${user.phoneNumber.number}">User Description</span><br/><br/>
             Your tariff: <span th:text="${user.tariff.tariffName}">User Description</span><br/><br/>
-            Your account: <span th:text="${user.account}">User Description</span><br/><br/>
+            Your balance: <span th:text="${user.balance}">User Description</span><br/><br/>
             <div th:if="${numberOfTariffs > 1}">
                 <a th:href="@{/user/changeTariff}"><button type="submit" class="btn btn-default">Change tariff</button></a>
             </div>
@@ -35,7 +35,7 @@
 
             <a th:href="@{/user/addons}"><button type="submit" class="btn btn-default">List of services</button></a><br/><br/>
 
-            <a th:href="@{/user/topUpAccount}"><button type="submit" class="btn btn-default">Top up the account</button></a>
+            <a th:href="@{/user/topUpBalance}"><button type="submit" class="btn btn-default">Top up the balance</button></a>
 
         </div>
 

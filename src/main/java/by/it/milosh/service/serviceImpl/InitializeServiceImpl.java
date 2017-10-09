@@ -8,7 +8,6 @@ import by.it.milosh.repository.PhoneNumberRepository;
 import by.it.milosh.repository.RoleRepository;
 import by.it.milosh.repository.UserRepository;
 import by.it.milosh.service.service.InitializeService;
-import by.it.milosh.service.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -55,7 +54,7 @@ public class InitializeServiceImpl implements InitializeService{
         Role role = roleRepository.getRoleByRoleName(RoleEnum.ADMIN.getType());
         user.getRoles().add(role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setAccount(0);
+        user.setBalance(0);
         userRepository.save(user);
         return null;
     }

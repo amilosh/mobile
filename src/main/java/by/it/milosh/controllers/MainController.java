@@ -77,7 +77,7 @@ public class MainController {
         Role role = roleService.getById(2L);
         user.getRoles().add(role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setAccount(0);
+        user.setBalance(0);
         userService.save(user);
         securityService.autoLogin(user.getUsername(), user.getPassword());
 

@@ -16,11 +16,11 @@
     <div class="row">
         <div class="col-md-12">
             <div>
-                Enter the amount for top up the account.
+                Enter the amount for top up the balance.
             </div>
             <br/>
-            <form name="topUpAccount" th:action="@{/user/topUpAccount}" method="post" th:object="${userWrapper}">
-                <input th:type="text" th:field="*{account}"><br/><br/>
+            <form name="topUpBalance" th:action="@{/user/topUpBalance}" method="post" th:object="${userWrapper}">
+                <input th:type="text" th:field="*{balance}"><br/><br/>
                 <button type="submit" name="connect" class="btn btn-default">Top up</button>
             </form>
         </div>

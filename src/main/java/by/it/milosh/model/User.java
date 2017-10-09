@@ -40,8 +40,8 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "addonId")})
     private List<Addon> addons = new ArrayList<Addon>();
 
-    @Column(name = "account", nullable = false)
-    private Integer account;
+    @Column(name = "balance", nullable = false)
+    private Integer balance;
 
     public User() {
     }
@@ -111,11 +111,11 @@ public class User {
         this.addons = addons;
     }
 
-    public Integer getAccount() {
-        return account;
+    public Integer getBalance() {
+        return balance;
     }
 
-    public void setAccount(Integer account) {
-        this.account = account;
+    public void setBalance(Integer balance) {
+        this.balance = balance;
     }
 }
