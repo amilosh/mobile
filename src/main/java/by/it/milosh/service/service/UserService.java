@@ -22,4 +22,6 @@ public interface UserService extends BaseService<User> {
 
     List<Addon> getAddonsNonUser(Long userId);
 
+    void registrationUser(User user);
+
 }

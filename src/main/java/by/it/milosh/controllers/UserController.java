@@ -39,7 +39,6 @@ public class UserController {
         int numberOfTariffs = tariffService.findAll().size();
         model.addAttribute("numberOfTariffs", numberOfTariffs);
         model.addAttribute("user", user);
-
         return "user/user";
     }
 
@@ -50,19 +49,6 @@ public class UserController {
         model.addAttribute("tariff", new Tariff());
         return "user/connect";
     }
-
-    /* было
-    @RequestMapping(value = "/connect", params = {"connect"}, method = RequestMethod.POST)
-    public String connect(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br, Principal principal) {
-        User user = userService.findUserByUsername(principal.getName());
-        Long tar_id = tariff.getTariffId();
-        userService.addTariffToUser(user, tar_id);
-        List<PhoneNumber> phoneNumbers = phoneNumberService.findAllUnusedNumbers();
-        PhoneNumber pn = phoneNumbers.get(0);
-        userService.addNumberToUser(user, pn);
-        return "redirect:/user";
-    }
-    */
 
     @RequestMapping(value = "/connect", params = {"connect"}, method = RequestMethod.POST)
     public String connect(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br, Principal principal, Model model) {

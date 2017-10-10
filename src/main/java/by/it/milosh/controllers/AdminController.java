@@ -43,8 +43,7 @@ public class AdminController {
 
     @RequestMapping(value = "/numbers", method = RequestMethod.GET)
     public String numbers(Model model) {
-        List<PhoneNumber> phoneNumbers = new ArrayList<PhoneNumber>();
-        phoneNumbers = phoneNumberService.findAll();
+        List<PhoneNumber> phoneNumbers = phoneNumberService.findAll();
         model.addAttribute("phoneNumbers", phoneNumbers);
         model.addAttribute("phoneNumber", new PhoneNumber());
         return "admin/numbers";
@@ -62,8 +61,7 @@ public class AdminController {
 
     @RequestMapping(value = "/tariffs", method = RequestMethod.GET)
     public String tariffs(Model model) {
-        List<Tariff> tariffs = new ArrayList<Tariff>();
-        tariffs = tariffService.findAll();
+        List<Tariff> tariffs = tariffService.findAll();
         model.addAttribute("tariffs", tariffs);
         model.addAttribute("tariff", new Tariff());
         return "admin/tariffs";
@@ -79,16 +77,8 @@ public class AdminController {
     public String abonents(Model model) {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
-        //model.addAttribute("user", new User());
         return "admin/abonents";
     }
-
-    /*
-    @RequestMapping(value = "/userInfo", params = {"userInfo"}, method = RequestMethod.POST)
-    public String userInfo(@Valid @ModelAttribute("user") User user, BindingResult br) {
-        return "admin/userInfo";
-    }
-    */
 
     @RequestMapping(value = "/userInfo/{username}", method = RequestMethod.GET)
     public String userInfo(@PathVariable("username") String username, Model model) {

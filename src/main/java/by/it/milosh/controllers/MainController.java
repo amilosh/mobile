@@ -57,7 +57,6 @@ public class MainController {
     public String login(@RequestParam(value = "error", required = false) String error,
                         @RequestParam(value = "logout", required = false) String logout,
                         Model model) {
-
         model.addAttribute("error", error != null);
         model.addAttribute("logout", logout != null);
         return "main/login";
@@ -74,13 +73,8 @@ public class MainController {
         if (br.hasErrors()) {
             return "main/registration";
         }
-        Role role = roleService.getById(2L);
-        user.getRoles().add(role);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setBalance(0);
-        userService.save(user);
+        userService.registrationUser(user);
         securityService.autoLogin(user.getUsername(), user.getPassword());
-
         return "redirect:/";
     }
 
@@ -93,8 +87,7 @@ public class MainController {
 
     @RequestMapping(value = "/services", method = RequestMethod.GET)
     public String services(Model model) {
-        List<Addon> addons = new ArrayList<Addon>();
-        addons = addonService.findAll();
+        List<Addon> addons = addonService.findAll();
         model.addAttribute("services", addons);
         return "main/services";
     }
@@ -114,13 +107,6 @@ public class MainController {
         } else {
             return "redirect:/user";
         }
-        /* было
-        if(name.equals("admin")) {
-            return "redirect:/admin";
-        } else {
-            return "redirect:/user";
-        }
-        */
     }
 
 }

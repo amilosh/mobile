@@ -1,15 +1,10 @@
 package by.it.milosh.service.serviceImpl;
 
-import by.it.milosh.model.Addon;
-import by.it.milosh.model.PhoneNumber;
-import by.it.milosh.model.Tariff;
-import by.it.milosh.model.User;
-import by.it.milosh.repository.PhoneNumberRepository;
-import by.it.milosh.repository.AddonRepository;
-import by.it.milosh.repository.TariffRepository;
-import by.it.milosh.repository.UserRepository;
+import by.it.milosh.model.*;
+import by.it.milosh.repository.*;
 import by.it.milosh.service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +23,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PhoneNumberRepository phoneNumberRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void save(User user) {
@@ -94,4 +95,12 @@ public class UserServiceImpl implements UserService {
         return addonsNonUser;
     }
 
+    @Override
+    public void registrationUser(User user) {
+        Role role = roleRepository.getRoleByRoleName(RoleEnum.USER.getType());
+        user.getRoles().add(role);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setBalance(0);
+        userRepository.save(user);
+    }
 }
