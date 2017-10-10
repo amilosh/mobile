@@ -58,9 +58,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void addTariffToUser(User user, Tariff tariff) {
+        user.setTariff(tariff);
+        userRepository.save(user);
+    }
+
+    @Override
     public void addNumberToUser(User user, PhoneNumber phoneNumber) {
-        //user.setPhoneNumber(phoneNumber);
-        //userRepository.save(user);
         phoneNumber.setUser(user);
         phoneNumber.setUsed(true);
         phoneNumberRepository.save(phoneNumber);
@@ -102,5 +106,39 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setBalance(0);
         userRepository.save(user);
+    }
+
+    @Override
+    public boolean isAdmin(User user) {
+        List<Role> roles = user.getRoles();
+        boolean isAdmin = false;
+        for (Role role : roles) {
+            if (role.getRoleName().equals(RoleEnum.ADMIN.getType())) {
+                isAdmin = true;
+            }
+        }
+        return isAdmin;
+    }
+
+    @Override
+    public User connect(User user, Tariff tariffFromForm) {
+        Tariff tariff = (Tariff) tariffRepository.findOne(tariffFromForm.getTariffId());
+        addTariffToUser(user, tariff);
+
+        Integer newUserBalance = user.getBalance() - tariff.getCostPerMonth();
+        user.setBalance(newUserBalance);
+
+        userRepository.save(user);
+
+        List<PhoneNumber> phoneNumbers = phoneNumberRepository.findAllUnusedNumbers();
+        PhoneNumber pn = phoneNumbers.get(0);
+        addNumberToUser(user, pn);
+
+        userRepository.save(user);
+
+        User returnUser = userRepository.findUserByUsername(user.getUsername());
+
+        return returnUser;
+
     }
 }

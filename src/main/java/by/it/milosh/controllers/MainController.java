@@ -108,8 +108,7 @@ public class MainController {
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
     public String personal(HttpSession session) {
         User user = (User) session.getAttribute("user");
-        Long userId = user.getUserId();
-        if(userId == 1L) {
+        if(userService.isAdmin(user)) {
             return "redirect:/admin";
         } else {
             return "redirect:/user";

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -34,11 +35,12 @@ public class UserController {
     private PhoneNumberService phoneNumberService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String personal(Principal principal, Model model) {
-        User user = userService.findUserByUsername(principal.getName());
+    public String personal(Model model, HttpSession session, Principal principal) {
+        User userPrincipal = userService.findUserByUsername(principal.getName());
+        User user = (User) session.getAttribute("user");
         int numberOfTariffs = tariffService.findAll().size();
         model.addAttribute("numberOfTariffs", numberOfTariffs);
-        model.addAttribute("user", user);
+        model.addAttribute("user", userPrincipal);
         return "user/user";
     }
 
@@ -51,39 +53,28 @@ public class UserController {
     }
 
     @RequestMapping(value = "/connect", params = {"connect"}, method = RequestMethod.POST)
-    public String connect(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br, Principal principal, Model model) {
-        User user = userService.findUserByUsername(principal.getName());
-        Long tariffId = tariff.getTariffId();
-        userService.addTariffToUser(user, tariffId);
-        Integer userBalance = user.getBalance();
-        Tariff checkTariff = tariffService.getById(tariffId);
-        Integer costPerMonth = checkTariff.getCostPerMonth();
-
-        Integer newBalance = userBalance - costPerMonth;
-        user.setBalance(newBalance);
-        userService.save(user);
-
-        List<PhoneNumber> phoneNumbers = phoneNumberService.findAllUnusedNumbers();
-        PhoneNumber pn = phoneNumbers.get(0);
-        userService.addNumberToUser(user, pn);
-
-        model.addAttribute("tariff", checkTariff);
+    public String connect(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        userService.connect(user, tariff);
+        model.addAttribute("tariff", user.getTariff());
         model.addAttribute("userWrapper", new UserWrapper());
+        session.setAttribute("user", user);
         return "user/connectAdvancePayment";
     }
 
     @RequestMapping(value = "/connectAdvancePayment", method = RequestMethod.POST)
-    public String connectAdvancePayment(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, Principal principal) {
-        User user = userService.findUserByUsername(principal.getName());
+    public String connectAdvancePayment(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
         Integer newBalance = user.getBalance() + userWrapper.getBalance();
         user.setBalance(newBalance);
         userService.save(user);
+        session.setAttribute("user", user);
         return "redirect:/user";
     }
 
     @RequestMapping(value = "changeTariff", method = RequestMethod.GET)
-    public String changeTariff(Model model, Principal principal) {
-        User user = userService.findUserByUsername(principal.getName());
+    public String changeTariff(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
         List<Tariff> tariffs = tariffService.findAll();
         model.addAttribute("tariffs", tariffs);
@@ -94,32 +85,26 @@ public class UserController {
     }
 
     @RequestMapping(value = "/changeTariff", params = {"changeTariff"}, method = RequestMethod.POST)
-    public String changeTariff(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br, Principal principal) {
-        User user = userService.findUserByUsername(principal.getName());
+    public String changeTariff(@Valid @ModelAttribute("tariff") Tariff tariff, BindingResult br, Principal principal, HttpSession session) {
+        User user = (User) session.getAttribute("user");
         Long tariffId = tariff.getTariffId();
         userService.addTariffToUser(user, tariffId);
-        return "redirect:/user";
-    }
-
-    @RequestMapping(value = "/emptyTariff", params = {"changeTariff"}, method = RequestMethod.POST)
-    public String emptyTariff(@Valid @ModelAttribute("emptyTariff") Tariff tariff, BindingResult br, Principal principal) {
-        User user = userService.findUserByUsername(principal.getName());
-        Long tariffId = tariff.getTariffId();
-        userService.addTariffToUser(user, tariffId);
+        session.setAttribute("user", user);
         return "redirect:/user";
     }
 
     @RequestMapping(value = "/addons", method = RequestMethod.GET)
-    public String addons(Model model, Principal principal) {
-        Long userId = userService.findUserByUsername(principal.getName()).getUserId();
+    public String addons(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        Long userId = user.getUserId();
         List<Addon> addonsOfUser = userService.getAddonsOfUser(userId);
         model.addAttribute("addonsOfUser", addonsOfUser);
         return "user/addons";
     }
 
     @RequestMapping(value = "/connectAddons", method = RequestMethod.GET)
-    public String connectAddons(Model model, Principal principal) {
-        User user = userService.findUserByUsername(principal.getName());
+    public String connectAddons(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
         List<Addon> addonsNonUser = userService.getAddonsNonUser(user.getUserId());
         model.addAttribute("addonsNonUser", addonsNonUser);
         model.addAttribute("userWrapper", new UserWrapper());
@@ -127,12 +112,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/connectAddons", method = RequestMethod.POST)
-    public String connectAddons(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, Principal principal) {
-        User user = userService.findUserByUsername(principal.getName());
+    public String connectAddons(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
         List<Long> addonIds = userWrapper.getAddonId();
         for (Long id : addonIds) {
             userService.addAddonToUser(user.getUserId(), id);
         }
+        session.setAttribute("user", user);
         return "redirect:/user";
     }
 
@@ -143,11 +129,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/topUpBalance", method = RequestMethod.POST)
-    public String topUpBalance(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, Principal principal) {
-        User user = userService.findUserByUsername(principal.getName());
+    public String topUpBalance(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
         Integer newBalance = user.getBalance() + userWrapper.getBalance();
         user.setBalance(newBalance);
         userService.save(user);
+        session.setAttribute("user", user);
         return "redirect:/user";
     }
 
