@@ -34,14 +34,13 @@
                     <h3 class="panel-title">SIGN IN</h3>
                 </div>
                 <div class="panel-body">
-                    <!--@thymesVar id="logout" type="text"-->
                     <div th:if="${logout}">
                         <div class="alert alert-info" role="alert">You have been logged successfully.</div>
                     </div>
-                    <!--@thymesVar id="error" type="text"-->
                     <div th:if="${error}">
                         <div class="alert alert-danger" role="alert">Invalid Username or Password</div>
                     </div>
+
                     <form class="form-horizontal" name="form" th:action="@{/main/login}" method="post">
                         <div class="form-group">
                             <label for="username" class="col-sm-2 control-label">Username</label>
@@ -71,6 +70,7 @@
                         </div>
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                     </form>
+
                 </div>
             </div>
         </div>

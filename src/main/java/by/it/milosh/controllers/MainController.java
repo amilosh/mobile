@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -56,10 +57,17 @@ public class MainController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(@RequestParam(value = "error", required = false) String error,
                         @RequestParam(value = "logout", required = false) String logout,
-                        Model model) {
+                        Model model) {        
         model.addAttribute("error", error != null);
         model.addAttribute("logout", logout != null);
         return "main/login";
+    }
+
+    @RequestMapping(value = "/setUserToSession", method = RequestMethod.GET)
+    public String setUserToSession(Principal principal, HttpSession session) {
+        User user = userService.findUserByUsername(principal.getName());
+        session.setAttribute("user", user);
+        return "main/main";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -93,14 +101,13 @@ public class MainController {
     }
 
     @RequestMapping(value = "/internet", method = RequestMethod.GET)
-    public String internet(Model model) {
+    public String internet() {
         return "main/internet";
     }
 
     @RequestMapping(value = "/personal", method = RequestMethod.GET)
-    public String personal(Principal principal) {
-        String name = principal.getName();
-        User user = userService.findUserByUsername(name);
+    public String personal(HttpSession session) {
+        User user = (User) session.getAttribute("user");
         Long userId = user.getUserId();
         if(userId == 1L) {
             return "redirect:/admin";
