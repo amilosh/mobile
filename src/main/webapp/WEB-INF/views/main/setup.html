@@ -24,12 +24,28 @@
 </div>
 
 <div class="container">
+    <div th:if="${isAdminInitialized}">
+        <div class="row">
+            <div class="col-md-12" style="margin-top: 20px">
+                <p>The administrator has already been initialized.</p>
+            </div>
+        </div>
+    </div>
+    <div th:if="${!isAdminInitialized}">
+    <div class="row">
+        <div class="col-md-12" style="margin-top: 20px">
+            <p>Before you start using the application, you must initialize the administrator. To do this, you must enter username and password.</p>
+            <p>Also, roles that are used in this application are automatically initialized: ROLE_ADMIN, ROLE_USER, ROLE_ABONENT.</p>
+            <p>20 phone numbers will be automatically added to the database.</p>
+            <p>After that you can go to the personal administrator page where you can perform the following operations:<br/>
+                &nbsp; - view all existing tariffs and add a new one;<br/>
+                &nbsp; - view all existing services and add a new one;<br/>
+                &nbsp; - view all subscribers, as well as their personal information.</p>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default" style="margin-top: 45px">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Enter username and password for ADMIN.</h3>
-                </div>
                 <div class="panel-body">
                     <form class="form-horizontal" name="form" action="#" th:action="@{/setup}" method="post" th:object="${user}">
                         <div class="form-group">
@@ -53,6 +69,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div th:replace="fragments/footer :: footer">

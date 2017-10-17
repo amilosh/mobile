@@ -44,6 +44,8 @@ public class StartController {
     @RequestMapping(value = "/setup", method = RequestMethod.GET)
     public String setup(Model model) {
         model.addAttribute("user", new User());
+        boolean isAdminInitialized = checkInitAdminService.getById(1L).isCheckInit();
+        model.addAttribute("isAdminInitialized", isAdminInitialized);
         return "main/setup";
     }
 
