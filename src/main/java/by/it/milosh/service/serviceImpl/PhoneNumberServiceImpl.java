@@ -33,4 +33,9 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     public List<PhoneNumber> findAllUnusedNumbers() {
         return phoneNumberRepository.findAllUnusedNumbers();
     }
+
+    @Override
+    public PhoneNumber findFirstByUsedFalse() {
+        return phoneNumberRepository.findFirstByUsedFalse();
+    }
 }

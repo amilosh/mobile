@@ -48,7 +48,7 @@
                         <div class="form-group">
                             <label for="password" class="col-sm-2 control-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="password" placeholder="Password" th:field="*{password}"/>
+                                <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}"/>
                                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="display: inline-block; margin-top: 5px; color: red">Name Error</span>
                             </div>
                         </div>

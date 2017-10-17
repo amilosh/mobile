@@ -9,4 +9,6 @@ public interface PhoneNumberService extends BaseService<PhoneNumber> {
 
     List<PhoneNumber> findAllUnusedNumbers();
 
+    PhoneNumber findFirstByUsedFalse();
+
 }

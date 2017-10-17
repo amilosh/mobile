@@ -31,4 +31,6 @@ public interface UserService extends BaseService<User> {
 
     User connect(User user, Tariff tariff);
 
+    User setBalance(User user, Integer changeBalance);
+
 }

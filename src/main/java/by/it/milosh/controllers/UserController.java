@@ -36,11 +36,10 @@ public class UserController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String personal(Model model, HttpSession session, Principal principal) {
-        User userPrincipal = userService.findUserByUsername(principal.getName());
         User user = (User) session.getAttribute("user");
         int numberOfTariffs = tariffService.findAll().size();
         model.addAttribute("numberOfTariffs", numberOfTariffs);
-        model.addAttribute("user", userPrincipal);
+        model.addAttribute("user", user);
         return "user/user";
     }
 
@@ -58,17 +57,14 @@ public class UserController {
         userService.connect(user, tariff);
         model.addAttribute("tariff", user.getTariff());
         model.addAttribute("userWrapper", new UserWrapper());
-        session.setAttribute("user", user);
         return "user/connectAdvancePayment";
     }
 
     @RequestMapping(value = "/connectAdvancePayment", method = RequestMethod.POST)
     public String connectAdvancePayment(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        Integer newBalance = user.getBalance() + userWrapper.getBalance();
-        user.setBalance(newBalance);
+        userService.setBalance(user, userWrapper.getBalance());
         userService.save(user);
-        session.setAttribute("user", user);
         return "redirect:/user";
     }
 
@@ -79,7 +75,6 @@ public class UserController {
         List<Tariff> tariffs = tariffService.findAll();
         model.addAttribute("tariffs", tariffs);
         model.addAttribute("tariff", new Tariff());
-
         model.addAttribute("emptyTariff", new Tariff());
         return "user/changeTariff";
     }

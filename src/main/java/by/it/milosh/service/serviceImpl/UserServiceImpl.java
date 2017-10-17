@@ -68,6 +68,7 @@ public class UserServiceImpl implements UserService {
         phoneNumber.setUser(user);
         phoneNumber.setUsed(true);
         phoneNumberRepository.save(phoneNumber);
+        user.setPhoneNumber(phoneNumber);
     }
 
     @Override
@@ -124,21 +125,17 @@ public class UserServiceImpl implements UserService {
     public User connect(User user, Tariff tariffFromForm) {
         Tariff tariff = (Tariff) tariffRepository.findOne(tariffFromForm.getTariffId());
         addTariffToUser(user, tariff);
+        setBalance(user, tariff.getCostPerMonth()*(-1));
+        PhoneNumber phoneNumber = phoneNumberRepository.findFirstByUsedFalse();
+        addNumberToUser(user, phoneNumber);
+        userRepository.save(user);
+        return user;
+    }
 
-        Integer newUserBalance = user.getBalance() - tariff.getCostPerMonth();
+    @Override
+    public User setBalance(User user, Integer changeBalance) {
+        Integer newUserBalance = user.getBalance() + changeBalance;
         user.setBalance(newUserBalance);
-
-        userRepository.save(user);
-
-        List<PhoneNumber> phoneNumbers = phoneNumberRepository.findAllUnusedNumbers();
-        PhoneNumber pn = phoneNumbers.get(0);
-        addNumberToUser(user, pn);
-
-        userRepository.save(user);
-
-        User returnUser = userRepository.findUserByUsername(user.getUsername());
-
-        return returnUser;
-
+        return user;
     }
 }

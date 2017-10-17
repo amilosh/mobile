@@ -14,4 +14,6 @@ public interface PhoneNumberRepository extends JpaRepository<PhoneNumber, Long> 
     @Query("FROM PhoneNumber WHERE used!=true ")
     List<PhoneNumber> findAllUnusedNumbers();
 
+    PhoneNumber findFirstByUsedFalse();
+
 }
