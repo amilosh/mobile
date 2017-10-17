@@ -43,7 +43,7 @@ public class InitializeServiceImpl implements InitializeService{
         if (phoneNumberRepository.findAll().isEmpty()) {
             for (int i = 0; i < NUMBERS_OF_INITIALIZED_PHONENUMBER; i++) {
                 Integer number = (int) (Math.random()*10000000);
-                PhoneNumber phoneNumber = new PhoneNumber(number, false);
+                PhoneNumber phoneNumber = new PhoneNumber(number);
                 phoneNumberRepository.save(phoneNumber);
             }
         }

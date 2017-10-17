@@ -14,7 +14,7 @@ public class PhoneNumber {
     @Column(name = "number", unique = true, nullable = false)
     private Integer number;
 
-    @Column(name = "used")
+    @Column(name = "used", columnDefinition = "bit(1) DEFAULT FALSE")
     private boolean used;
 
     @OneToOne
@@ -22,6 +22,10 @@ public class PhoneNumber {
     private User user;
 
     public PhoneNumber() {
+    }
+
+    public PhoneNumber(Integer number) {
+        this.number = number;
     }
 
     public PhoneNumber(Integer number, boolean used) {
