@@ -19,8 +19,9 @@
                 In order to use the services you must advance the balance. Minimum: <span th:text="${tariff.costPerMonth}">...</span>
             </div>
             <br/>
-            <form name="topUpAccount" th:action="@{/user/connectAdvancePayment}" method="post" th:object="${userWrapper}">
-                <input th:type="text" th:field="*{balance}"><br/><br/>
+            <form name="topUpAccount" th:action="@{/user/connectAdvancePayment}" method="post" th:object="${userWrapper}" onSubmit="return myFunction();">
+                <input th:type="text" th:field="*{balance}" id="balance"><span id="balanceError"></span><br/><br/>
+                <input th:type="hidden" id="minBalance" th:value="${tariff.costPerMonth}">
                 <button type="submit" name="connect" class="btn btn-default">Advance balance</button>
             </form>
         </div>
@@ -30,6 +31,29 @@
     </div>
 
 </div>
+
+<script>
+    function myFunction() {
+        var x, text, minBalance;
+        minBalance = document.getElementById("minBalance").value;
+        var comparison = parseInt(minBalance);
+
+        x = document.getElementById("balance").value;
+
+        var reg = /^[0-9]+$/;
+        if (!reg.test(x)) {
+            text = "&nbsp;&nbsp;Enter the number";
+            document.getElementById("balanceError").innerHTML = text;
+            return false;
+        } else if (x < comparison) {
+            text = "&nbsp;&nbsp;The minimum value should be: " + minBalance;
+            document.getElementById("balanceError").innerHTML = text;
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
 
 </body>
 </html>
