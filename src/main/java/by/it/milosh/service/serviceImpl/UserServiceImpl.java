@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registrationUser(User user) {
-        Role role = roleRepository.getRoleByRoleName(RoleEnum.USER.getType());
+        Role role = roleRepository.getRoleByRoleName(RoleEnum.USER.getName());
         user.getRoles().add(role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setBalance(0);
@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
         List<Role> roles = user.getRoles();
         boolean isAdmin = false;
         for (Role role : roles) {
-            if (role.getRoleName().equals(RoleEnum.ADMIN.getType())) {
+            if (role.getRoleName().equals(RoleEnum.ADMIN.getName())) {
                 isAdmin = true;
             }
         }

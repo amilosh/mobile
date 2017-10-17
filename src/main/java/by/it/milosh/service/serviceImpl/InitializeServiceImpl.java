@@ -32,9 +32,9 @@ public class InitializeServiceImpl implements InitializeService{
     @Override
     public void initializeRoles() {
         if (roleRepository.findAll().isEmpty()) {
-            roleRepository.save(new Role(RoleEnum.ADMIN.getType()));
-            roleRepository.save(new Role(RoleEnum.USER.getType()));
-            roleRepository.save(new Role(RoleEnum.ABONENT.getType()));
+            roleRepository.save(new Role(RoleEnum.ADMIN.getName()));
+            roleRepository.save(new Role(RoleEnum.USER.getName()));
+            roleRepository.save(new Role(RoleEnum.ABONENT.getName()));
         }
     }
 
@@ -51,7 +51,7 @@ public class InitializeServiceImpl implements InitializeService{
 
     @Override
     public User initializeAdmin(User user) {
-        Role role = roleRepository.getRoleByRoleName(RoleEnum.ADMIN.getType());
+        Role role = roleRepository.getRoleByRoleName(RoleEnum.ADMIN.getName());
         user.getRoles().add(role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setBalance(0);

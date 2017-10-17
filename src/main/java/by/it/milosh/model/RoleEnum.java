@@ -5,14 +5,14 @@ public enum RoleEnum {
     USER("ROLE_USER"),
     ABONENT("ROLE_ABONENT");
 
-    private String type;
+    private String name;
 
     private RoleEnum(String type) {
-        this.type = type;
+        this.name = type;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
     @Override
