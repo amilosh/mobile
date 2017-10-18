@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
     public void registrationUser(User user) {
         Role role = roleRepository.getRoleByRoleName(RoleEnum.USER.getName());
         user.getRoles().add(role);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getRowPassword()));
         user.setBalance(0);
         userRepository.save(user);
     }
