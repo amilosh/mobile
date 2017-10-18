@@ -13,7 +13,6 @@
 </div>
 
 <nav class="container" style="padding-right: 0px; padding-left: 0px;" th:fragment="adminNavbar">
-    <br/>
     <div class="navbar navbar-default" style="margin-bottom:0px;">
         <div class="container-fluid" style="padding-left: 0px;">
             <div class="navbar-header">
@@ -38,13 +37,13 @@
 
 
 <!-- Body -->
-<div class="container">
+<div class="container" style="margin-top: 20px">
 
     User Id: <span th:text="${user.userId}">...</span><br/><br/>
     Username: <span th:text="${user.username}">...</span><br/><br/>
     Phone Number: <span th:text="${user.phoneNumber.number}">...</span><br/><br/>
-    Tariff: <span th:text="${user.tariff.tariffName}">...</span>
-    Account: <span th:text="${user.balance}">...</span>
+    Tariff: <span th:text="${user.tariff.tariffName}">...</span><br/><br/>
+    Balance: <span th:text="${user.balance}">...</span>
 
     <div th:replace="fragments/footer :: footer">
     </div>

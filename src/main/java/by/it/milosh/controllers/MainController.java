@@ -63,13 +63,6 @@ public class MainController {
         return "main/login";
     }
 
-    @RequestMapping(value = "/setUserToSession", method = RequestMethod.GET)
-    public String setUserToSession(Principal principal, HttpSession session) {
-        User user = userService.findUserByUsername(principal.getName());
-        session.setAttribute("user", user);
-        return "main/main";
-    }
-
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("user", new User());

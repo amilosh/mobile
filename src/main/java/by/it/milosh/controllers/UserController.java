@@ -84,7 +84,6 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         Long tariffId = tariff.getTariffId();
         userService.addTariffToUser(user, tariffId);
-        session.setAttribute("user", user);
         return "redirect:/user";
     }
 
@@ -113,7 +112,6 @@ public class UserController {
         for (Long id : addonIds) {
             userService.addAddonToUser(user.getUserId(), id);
         }
-        session.setAttribute("user", user);
         return "redirect:/user";
     }
 
@@ -126,10 +124,7 @@ public class UserController {
     @RequestMapping(value = "/topUpBalance", method = RequestMethod.POST)
     public String topUpBalance(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        Integer newBalance = user.getBalance() + userWrapper.getBalance();
-        user.setBalance(newBalance);
-        userService.save(user);
-        session.setAttribute("user", user);
+        userService.setBalance(user, userWrapper.getBalance());
         return "redirect:/user";
     }
 

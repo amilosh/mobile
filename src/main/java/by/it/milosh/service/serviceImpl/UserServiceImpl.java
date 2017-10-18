@@ -136,6 +136,7 @@ public class UserServiceImpl implements UserService {
     public User setBalance(User user, Integer changeBalance) {
         Integer newUserBalance = user.getBalance() + changeBalance;
         user.setBalance(newUserBalance);
+        userRepository.save(user);
         return user;
     }
 }
