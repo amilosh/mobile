@@ -34,7 +34,7 @@
             <th:block th:each="addon : ${addonsNonUser}">
                 <tr>
                     <td>
-                        <input type="checkbox" th:field="*{addonId}" th:value="${addon.addonId}"/>
+                        <input type="checkbox" th:field="*{addonIds}" th:value="${addon.addonId}"/>
                     </td>
                     <td th:text="${addon.addonName}">...</td>
                     <td th:text="${addon.description}">...</td>

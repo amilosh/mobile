@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class StartController {
@@ -44,6 +45,10 @@ public class StartController {
     @RequestMapping(value = "/setup", method = RequestMethod.GET)
     public String setup(Model model) {
         model.addAttribute("user", new User());
+        List<CheckInitAdmin> checkInitAdminList = checkInitAdminService.findAll();
+        if (checkInitAdminList.isEmpty()) {
+            checkInitAdminService.save(new CheckInitAdmin(false));
+        }
         boolean isAdminInitialized = checkInitAdminService.getById(1L).isCheckInit();
         model.addAttribute("isAdminInitialized", isAdminInitialized);
         return "main/setup";

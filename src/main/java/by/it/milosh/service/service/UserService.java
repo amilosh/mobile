@@ -19,11 +19,11 @@ public interface UserService extends BaseService<User> {
 
     Long numberOfUsers();
 
-    void addAddonToUser(Long userId, Long addonId);
+    void addAddonToUser(User user, Long addonId);
 
-    List<Addon> getAddonsOfUser(Long userId);
+    List<Addon> getAddonsOfUser(User user);
 
-    List<Addon> getAddonsNonUser(Long userId);
+    List<Addon> getAddonsNonUser(User user);
 
     void registrationUser(User user);
 

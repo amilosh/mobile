@@ -23,7 +23,7 @@ public class User {
 
     @Transient
     @Size(min=4, max=16, message = "Password must be between 4 and 16.")
-    private String rowPassword;
+    private String rawPassword;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinTable(name = "user_roles",
@@ -38,8 +38,10 @@ public class User {
     @JoinColumn(name = "tariff_id")
     private Tariff tariff;
 
-    @ManyToMany()
-    @JoinTable(name = "user_services",
+    @ManyToMany(
+            //fetch = FetchType.EAGER, cascade = {CascadeType.ALL}
+    )
+    @JoinTable(name = "user_addons",
             joinColumns = {@JoinColumn(name = "userId")},
             inverseJoinColumns = {@JoinColumn(name = "addonId")})
     private List<Addon> addons = new ArrayList<Addon>();
@@ -123,11 +125,11 @@ public class User {
         this.balance = balance;
     }
 
-    public String getRowPassword() {
-        return rowPassword;
+    public String getRawPassword() {
+        return rawPassword;
     }
 
-    public void setRowPassword(String rowPassword) {
-        this.rowPassword = rowPassword;
+    public void setRawPassword(String rawPassword) {
+        this.rawPassword = rawPassword;
     }
 }

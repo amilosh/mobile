@@ -4,19 +4,19 @@ import java.util.List;
 
 public class UserWrapper {
 
-    private List<Long> addonId;
+    private List<Long> addonIds;
 
     private Integer balance;
 
     public UserWrapper() {
     }
 
-    public List<Long> getAddonId() {
-        return addonId;
+    public List<Long> getAddonIds() {
+        return addonIds;
     }
 
-    public void setAddonId(List<Long> addonId) {
-        this.addonId = addonId;
+    public void setAddonIds(List<Long> addonIds) {
+        this.addonIds = addonIds;
     }
 
     public Integer getBalance() {

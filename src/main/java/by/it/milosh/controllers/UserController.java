@@ -90,8 +90,9 @@ public class UserController {
     @RequestMapping(value = "/addons", method = RequestMethod.GET)
     public String addons(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        Long userId = user.getUserId();
-        List<Addon> addonsOfUser = userService.getAddonsOfUser(userId);
+        //Long userId = user.getUserId();
+        List<Addon> addonsOfUser = userService.getAddonsOfUser(user);
+        //List<Addon> addonsOfUser = user.getAddons();
         model.addAttribute("addonsOfUser", addonsOfUser);
         return "user/addons";
     }
@@ -99,7 +100,7 @@ public class UserController {
     @RequestMapping(value = "/connectAddons", method = RequestMethod.GET)
     public String connectAddons(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        List<Addon> addonsNonUser = userService.getAddonsNonUser(user.getUserId());
+        List<Addon> addonsNonUser = userService.getAddonsNonUser(user); // list of addons that the user does not use
         model.addAttribute("addonsNonUser", addonsNonUser);
         model.addAttribute("userWrapper", new UserWrapper());
         return "user/connectAddons";
@@ -108,9 +109,9 @@ public class UserController {
     @RequestMapping(value = "/connectAddons", method = RequestMethod.POST)
     public String connectAddons(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        List<Long> addonIds = userWrapper.getAddonId();
+        List<Long> addonIds = userWrapper.getAddonIds();
         for (Long id : addonIds) {
-            userService.addAddonToUser(user.getUserId(), id);
+            userService.addAddonToUser(user, id);
         }
         return "redirect:/user";
     }

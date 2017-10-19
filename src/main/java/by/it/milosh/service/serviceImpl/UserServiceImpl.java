@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -77,24 +78,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addAddonToUser(Long userId, Long addonId) {
-        User user = userRepository.findOne(userId);
+    public void addAddonToUser(User user, Long addonId) {
+        //User user = userRepository.findOne(userId);
         Addon addon = addonRepository.findOne(addonId);
-        user.getAddons().add(addon);
-        userRepository.save(user);
+        //user.getAddons().add(addon);
+        User fixUser = userRepository.findUserByUsername(user.getUsername());
+        fixUser.getAddons().add(addon);
+        userRepository.save(fixUser);
     }
 
     @Override
-    public List<Addon> getAddonsOfUser(Long userId) {
-        User user = userRepository.findOne(userId);
-        List<Addon> addons = user.getAddons();
+    public List<Addon> getAddonsOfUser(User user) {
+        //User user = userRepository.findOne(userId);
+        //List<Addon> addons = user.getAddons();
+        /* если сделать просто List<Addon> addons = user.getAddons(); - то addons - unable to evaluate the expression Method threw 'org.hibernate.LazyInitializationException' exception.
+         * пофиксил эту проблему тем, что вытянул юзера из базы */
+        User fixUser = userRepository.findUserByUsername(user.getUsername());
+        List<Addon> addons = fixUser.getAddons();
         return addons;
     }
 
     @Override
-    public List<Addon> getAddonsNonUser(Long userId) {
-        User user = userRepository.findOne(userId);
-        List<Addon> addonsOfUser = user.getAddons();
+    public List<Addon> getAddonsNonUser(User user) {
+        //User user = userRepository.findOne(userId);
+        //List<Addon> addonsOfUser = user.getAddons();
+        User fixUser = userRepository.findUserByUsername(user.getUsername());
+        List<Addon> addonsOfUser = fixUser.getAddons();
         List<Addon> addonsNonUser = addonRepository.findAll();
         addonsNonUser.removeAll(addonsOfUser);
         return addonsNonUser;
@@ -104,8 +113,10 @@ public class UserServiceImpl implements UserService {
     public void registrationUser(User user) {
         Role role = roleRepository.getRoleByRoleName(RoleEnum.USER.getName());
         user.getRoles().add(role);
-        user.setPassword(passwordEncoder.encode(user.getRowPassword()));
+        user.setPassword(passwordEncoder.encode(user.getRawPassword()));
         user.setBalance(0);
+        List<Addon> addons = new ArrayList<Addon>();
+        user.setAddons(addons);
         userRepository.save(user);
     }
 

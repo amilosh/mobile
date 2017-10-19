@@ -25,7 +25,9 @@ public class Addon {
     @Column(name = "cost_per_month", nullable = false)
     private Integer costPerMonth;
 
-    @ManyToMany(mappedBy = "addons")
+    @ManyToMany(mappedBy = "addons"
+            //, fetch = FetchType.EAGER, cascade = {CascadeType.ALL}
+    )
     private List<User> users = new ArrayList<User>();
 
     public Addon() {
