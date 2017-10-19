@@ -33,4 +33,6 @@ public interface UserService extends BaseService<User> {
 
     User setBalance(User user, Integer changeBalance);
 
+    List<User> findUsersByRoleId(int roleId);
+
 }
