@@ -20,7 +20,7 @@
             </div>
             <br/>
             <form name="topUpBalance" th:action="@{/user/topUpBalance}" method="post" th:object="${userWrapper}">
-                <input th:type="text" th:field="*{balance}"><br/><br/>
+                <input th:type="text" th:field="*{balance}" autofocus><br/><br/>
                 <button type="submit" name="connect" class="btn btn-default">Top up</button>
             </form>
         </div>

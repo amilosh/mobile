@@ -20,7 +20,7 @@
             </div>
             <br/>
             <form name="topUpAccount" th:action="@{/user/connectAdvancePayment}" method="post" th:object="${userWrapper}" onSubmit="return myFunction();">
-                <input th:type="text" th:field="*{balance}" id="balance"><span id="balanceError"></span><br/><br/>
+                <input th:type="text" th:field="*{balance}" id="balance"><span id="balanceError" autofocus></span><br/><br/>
                 <input th:type="hidden" id="minBalance" th:value="${tariff.costPerMonth}">
                 <button type="submit" name="connect" class="btn btn-default">Advance balance</button>
             </form>
