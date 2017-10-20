@@ -76,7 +76,8 @@ public class AdminController {
     @RequestMapping(value = "/abonents", method = RequestMethod.GET)
     public String abonents(Model model) {
         //List<User> users = userService.findAll();
-        List<User> usersByRole = userService.findUsersByRoleId(2);
+        //List<User> usersByRole = userService.findUsersByRoleId(2);
+        List<User> usersByRole = userService.findUsersByRoleName(RoleEnum.USER.getName());
         model.addAttribute("users", usersByRole);
         return "admin/abonents";
     }

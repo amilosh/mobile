@@ -35,4 +35,6 @@ public interface UserService extends BaseService<User> {
 
     List<User> findUsersByRoleId(int roleId);
 
+    List<User> findUsersByRoleName(String roleNme);
+
 }

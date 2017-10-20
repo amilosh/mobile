@@ -18,4 +18,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select * from user where user.user_id in (select user_roles.user_id from user_roles where user_roles.role_id=?1)", nativeQuery = true)
     List<User> findUsersByRoleId(int roleId);
 
+    @Query(value = "select * from user where user.user_id in (select user_roles.user_id from user_roles where user_roles.role_id in (select role.role_id from role where role.role_name=?1))", nativeQuery = true)
+    List<User> findUsersByRoleName(String roleNme);
+
 }
