@@ -6,9 +6,10 @@
     <!-- Bootstrap -->
     <div th:replace="fragments/bootstrap :: bootstrap">
     </div>
-
-
-
+    <script th:inline="javascript" th:src="@{/resources/js/postrequest.js}">
+    </script>
+    <script th:inline="javascript" th:src="@{/resources/js/getrequest.js}">
+    </script>
 </head>
 <body>
 
@@ -37,11 +38,14 @@
                 <div class="panel-body">
 
 
-                    <form class="form-horizontal" name="form" action="#" th:action="@{/main/registration}" method="post" th:object="${user}">
+                    <form class="form-horizontal" name="form" action="#" th:action="@{/main/registration}" method="post" th:object="${user}" id="registrationForm">
                         <div class="form-group">
                             <label for="username" class="col-sm-2 control-label">Username</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{username}" autofocus/>
+                                <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{username}" oninput="myFunction()" autofocus/><br/>
+                                <p id="demo"></p>
+                                <div class="col-sm-7" id="postResultDiv">
+                                </div>
                                 <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="display: inline-block; margin-top: 5px; color: red">Name Error</span>
                             </div>
                         </div>

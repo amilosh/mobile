@@ -79,31 +79,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addAddonToUser(User user, Long addonId) {
-        //User user = userRepository.findOne(userId);
         Addon addon = addonRepository.findOne(addonId);
-        //user.getAddons().add(addon);
-        User fixUser = userRepository.findUserByUsername(user.getUsername());
-        fixUser.getAddons().add(addon);
-        userRepository.save(fixUser);
+        User persistentUser = userRepository.findUserByUsername(user.getUsername());
+        persistentUser.getAddons().add(addon);
+        userRepository.save(persistentUser);
     }
 
     @Override
     public List<Addon> getAddonsOfUser(User user) {
-        //User user = userRepository.findOne(userId);
-        //List<Addon> addons = user.getAddons();
-        /* если сделать просто List<Addon> addons = user.getAddons(); - то addons - unable to evaluate the expression Method threw 'org.hibernate.LazyInitializationException' exception.
-         * пофиксил эту проблему тем, что вытянул юзера из базы */
-        User fixUser = userRepository.findUserByUsername(user.getUsername());
-        List<Addon> addons = fixUser.getAddons();
+        User persistentUser = userRepository.findUserByUsername(user.getUsername());
+        List<Addon> addons = persistentUser.getAddons();
         return addons;
     }
 
     @Override
     public List<Addon> getAddonsNonUser(User user) {
-        //User user = userRepository.findOne(userId);
-        //List<Addon> addonsOfUser = user.getAddons();
-        User fixUser = userRepository.findUserByUsername(user.getUsername());
-        List<Addon> addonsOfUser = fixUser.getAddons();
+        User persistentUser = userRepository.findUserByUsername(user.getUsername());
+        List<Addon> addonsOfUser = persistentUser.getAddons();
         List<Addon> addonsNonUser = addonRepository.findAll();
         addonsNonUser.removeAll(addonsOfUser);
         return addonsNonUser;

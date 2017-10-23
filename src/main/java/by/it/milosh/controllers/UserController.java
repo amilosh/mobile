@@ -110,8 +110,8 @@ public class UserController {
     public String connectAddons(@ModelAttribute("userWrapper") UserWrapper userWrapper, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
         List<Long> addonIds = userWrapper.getAddonIds();
-        for (Long id : addonIds) {
-            userService.addAddonToUser(user, id);
+        for (Long addonId : addonIds) {
+            userService.addAddonToUser(user, addonId);
         }
         return "redirect:/user";
     }
