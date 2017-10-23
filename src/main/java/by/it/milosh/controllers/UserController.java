@@ -90,17 +90,15 @@ public class UserController {
     @RequestMapping(value = "/addons", method = RequestMethod.GET)
     public String addons(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        //Long userId = user.getUserId();
-        List<Addon> addonsOfUser = userService.getAddonsOfUser(user);
-        //List<Addon> addonsOfUser = user.getAddons();
-        model.addAttribute("addonsOfUser", addonsOfUser);
+        List<Addon> addonsByUserId = addonService.getAddonsByUserId(user.getUserId());
+        model.addAttribute("addonsOfUser", addonsByUserId);
         return "user/addons";
     }
 
     @RequestMapping(value = "/connectAddons", method = RequestMethod.GET)
     public String connectAddons(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        List<Addon> addonsNonUser = userService.getAddonsNonUser(user); // list of addons that the user does not use
+        List<Addon> addonsNonUser = addonService.getAddonsNotUsedByUserId(user.getUserId()); // list of addons that the user does not use
         model.addAttribute("addonsNonUser", addonsNonUser);
         model.addAttribute("userWrapper", new UserWrapper());
         return "user/connectAddons";

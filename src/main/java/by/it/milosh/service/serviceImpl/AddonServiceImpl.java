@@ -28,4 +28,14 @@ public class AddonServiceImpl implements AddonService {
     public List<Addon> findAll() {
         return addonRepository.findAll();
     }
+
+    @Override
+    public List<Addon> getAddonsByUserId(Long userId) {
+        return addonRepository.getAddonsByUserId(userId);
+    }
+
+    @Override
+    public List<Addon> getAddonsNotUsedByUserId(Long userId) {
+        return addonRepository.getAddonsNotUsedByUserId(userId);
+    }
 }
