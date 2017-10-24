@@ -21,7 +21,7 @@ public class RestWebController {
     }
 
 
-    /*
+
     @PostMapping(value = "/save")
     public Response postCustomer(@RequestBody UserRest userRest) {
         userRests.add(userRest);
@@ -30,8 +30,9 @@ public class RestWebController {
         Response response = new Response("Done", userRest);
         return response;
     }
-    */
 
+
+    /*
     @ResponseBody
     @RequestMapping(value = "/save")
     public Response postCustomer(@RequestBody User user) {
@@ -43,5 +44,6 @@ public class RestWebController {
         Response response = new Response("Done", user);
         return response;
     }
+    */
 
 }

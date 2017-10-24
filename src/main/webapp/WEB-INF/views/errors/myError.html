@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Main</title>
+
+    <div th:replace="fragments/bootstrap :: bootstrap">
+    </div>
+
+    <style>
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div th:replace="fragments/header :: header">
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>MY ERROR</h2>
+
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer">
+    </div>
+
+</div>
+
+</body>
+</html>

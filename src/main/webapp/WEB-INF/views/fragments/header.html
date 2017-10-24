@@ -15,9 +15,9 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li th:classappend="${#request.requestURI == '/main/tariffs'}?active"><a th:href="@{/main/tariffs}" th:text="#{header.tariffs}">Tariffs</a></li>
-                    <li th:classappend="${#request.requestURI == '/main/services'}?active"><a th:href="@{/main/services}" th:text="#{header.services}">Services</a></li>
-                    <li th:classappend="${#request.requestURI == '/main/internet'}?active"><a th:href="@{/main/internet}" th:text="#{header.internet}">Internet</a></li>
+                    <li th:classappend="${#request.requestURI == '/mobile/main/tariffs'}?active"><a th:href="@{/main/tariffs}" th:text="#{header.tariffs}">Tariffs</a></li>
+                    <li th:classappend="${#request.requestURI == '/mobile/main/services'}?active"><a th:href="@{/main/services}" th:text="#{header.services}">Services</a></li>
+                    <li th:classappend="${#request.requestURI == '/mobile/main/internet'}?active"><a th:href="@{/main/internet}" th:text="#{header.internet}">Internet</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span th:text="#{header.language}">Language</span><span class="caret"></span></a>
                         <ul class="dropdown-menu">

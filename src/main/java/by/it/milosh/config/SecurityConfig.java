@@ -33,11 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomAuthenticationSuccessHandler successHandler;
 
-
-//    @Bean
-//    public TokenBasedRememberMeServices rememberMeServices() {
-//        return new TokenBasedRememberMeServices("remember-me-key", authService);
-//    }
+    @Bean
+    public TokenBasedRememberMeServices rememberMeServices() {
+        return new TokenBasedRememberMeServices("remember-me-key", authService);
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -63,18 +62,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .and()
                 .logout()
+                    .deleteCookies("my-remember-me")
                     .logoutUrl("/logout").permitAll()
                     .logoutSuccessUrl("/").permitAll()
                     .and()
-//                .rememberMe()
-//                    .rememberMeServices(rememberMeServices())
-//                    .key("remember-me-key")
-//                    .rememberMeParameter("remember-me-param")
-//                    //.rememberMeCookieName("my-remember-me")
-//                    .tokenValiditySeconds(86400)
-//                    .and()
+                .rememberMe()
+                    .rememberMeServices(rememberMeServices())
+                    .key("remember-me-key")
+                    .rememberMeParameter("remember-me")
+                    .tokenValiditySeconds(86400)
+                    .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-
     }
 
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

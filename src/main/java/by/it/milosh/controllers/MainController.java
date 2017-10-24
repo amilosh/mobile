@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,16 @@ public class MainController {
     public String main() {
         return "main/main";
     }
+
+    @RequestMapping(value = "/fake", method = RequestMethod.GET)
+    public String fake() throws Exception{
+        int i = 1;
+        if (i == 1) {
+            throw new IOException("found IO Exception");
+        }
+        return "main/fake";
+    }
+
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user() {
